@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="857.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.LoginPageController">
+   <children>
+      <VBox layoutX="349.0" layoutY="62.0" prefHeight="549.0" prefWidth="481.0" style="-fx-background-color: white;">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="429.0" text="Sign in">
+               <VBox.margin>
+                  <Insets bottom="60.0" left="20.0" right="20.0" top="110.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="PhoneNo" labelFloat="true" promptText="Phone No">
+               <VBox.margin>
+                  <Insets bottom="40.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="Password" labelFloat="true" promptText="Password">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXPasswordField>
+            <Label fx:id="IncorrectLabel" prefHeight="17.0" prefWidth="410.0" styleClass="waring-text" text="Incorrect Phone no or Password!" textFill="#ff2c2c">
+               <VBox.margin>
+                  <Insets bottom="40.0" left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <JFXButton fx:id="SignIn" buttonType="RAISED" onAction="#signInUser" prefHeight="31.0" prefWidth="456.0" styleClass="jfx-button-black" text="Sign in" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+      <Label layoutX="43.0" layoutY="412.0" prefHeight="25.0" prefWidth="207.0" text="Don't have an account? " textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="SignUpLabel" layoutX="43.0" layoutY="441.0" onMouseClicked="#CreateNewAccount" styleClass="signup-label" stylesheets="@../GeniunCoder.css" text="Click here to create new account." textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="103.0" fitWidth="142.0" layoutX="116.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/parked_car.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

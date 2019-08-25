@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="achorPaneParent" prefHeight="838.0" prefWidth="817.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.SearchParking2Controller">
+   <children>
+      <JFXListView fx:id="ListView" expanded="true" prefHeight="838.0" prefWidth="817.0" styleClass="jfx-list-view" stylesheets="@../GeniunCoder.css" verticalGap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

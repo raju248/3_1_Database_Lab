@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="705.0" style="-fx-background-color: #00001a;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.SearchParkingController">
+   <children>
+      <TableView fx:id="MainTable" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="677.0">
+        <columns>
+          <TableColumn fx:id="NameColumn" prefWidth="239.0" text="Name" />
+          <TableColumn fx:id="PhoneNoColumn" prefWidth="244.0" text="Phone No" />
+            <TableColumn fx:id="PasswordColumn" prefWidth="226.0" text="Password" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

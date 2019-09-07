@@ -11,11 +11,13 @@ package parkingmanagementsystem;
  */
 public class Users {
     String name, phoneNo, password;
+    int type;
 
-    public Users(String name, String phoneNo, String password) {
+    public Users(String name, String phoneNo, String password, int type) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.password = password;
+        this.type = type;
     }
 
     public String getName() {
@@ -40,6 +42,14 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
     
     

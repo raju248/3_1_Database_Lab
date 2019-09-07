@@ -64,7 +64,7 @@ public class SearchParkingController implements Initializable {
         
 
         try {
-            String sql = "Select Name, MobileNo, Password from Users";
+            String sql = "Select Name, PhoneNo, Password , Type from Users";
 
             Statement statement = c.connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -74,7 +74,7 @@ public class SearchParkingController implements Initializable {
             while(resultSet.next())
             {
                 String name = resultSet.getString("Name");
-                String mobileNo = resultSet.getString("MobileNo");
+                String mobileNo = resultSet.getString("PhoneNo");
                 String password = resultSet.getString("Password");
                 
                         
@@ -82,7 +82,7 @@ public class SearchParkingController implements Initializable {
                         System.out.println(resultSet.getString(2));
                         System.out.println(resultSet.getString(3));
                 
-                Users user = new Users(name,mobileNo,password);
+                Users user = new Users(name,mobileNo,password, resultSet.getInt(4));
                 
                 dataForTable.add(user);
             }

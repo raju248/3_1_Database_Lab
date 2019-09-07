@@ -42,6 +42,9 @@ public class LoginPageController implements Initializable {
 
     DatabaseHelper db = new DatabaseHelper();
     boolean isMobileNoValid;
+    
+    static Users loggedUser;
+    
 
     /**
      * Initializes the controller class.
@@ -86,7 +89,7 @@ public class LoginPageController implements Initializable {
         System.out.println(isMobileNoValid);
 
         if (isMobileNoValid && phoneNo.length() == 11 && !password.isEmpty()) {
-            String sql = "SELECT * FROM Users WHERE MobileNO =? and Password = ?";
+            String sql = "SELECT * FROM Users WHERE PhoneNo =? and Password = ?";
 
             try {
                 db.connectDB();
@@ -94,17 +97,27 @@ public class LoginPageController implements Initializable {
 
                 ps.setString(1, phoneNo);
                 ps.setString(2, password);
+                
+                ResultSet resultSet = ps.executeQuery();
 
-                if (db.CheckUser(ps)) {
+                if (resultSet.next()) {
 //                        System.out.println(resultSet.getString("UserId"));
 //                        System.out.println(resultSet.getString("Name"));
 //                        System.out.println(resultSet.getString("MobileNo"));
 //                        System.out.println(resultSet.getString("Password"));
+                            String userId = resultSet.getString("UserId");
+                            String name = resultSet.getString("Name");
+                            String pass = resultSet.getString("Password");
+                            String mobile = resultSet.getString("PhoneNo");
+                            int type = resultSet.getInt("Type");
+                            
+
+                            loggedUser = new Users(name, mobile, pass, type);
 
                     try {
                         Stage stage = (Stage) SignIn.getScene().getWindow();
                         String title = "Main Menu";
-                        LoadStages load = new LoadStages(stage, title, "test.fxml");
+                        LoadStages load = new LoadStages(stage, title, "VehicleOwnerMainMenu.fxml");
                     } catch (IOException e) {
                         System.out.println(e);
                     }

@@ -2,7 +2,9 @@
 	-fx-background-color:  #00001a;
 }
 
-
+label-white{
+    -fx-text-fill: white;
+}
 
 .alert{
     -fx-background-color:  #00001a;

@@ -162,7 +162,7 @@ public class SignUpController implements Initializable {
        
             RentOrVehicleModel.textProperty().addListener((observable, oldValue, newValue) -> {
              
-            String PATTERN = "[+-]?([0-9]*[.])?[0-9]+";    //Writing pattern and array size//
+            String PATTERN = "[0-9]?([0-9]*[.])?[0-9]+";    //Writing pattern and array size//
             Pattern patt = Pattern.compile(PATTERN);
             Matcher match = patt.matcher(newValue);
             
@@ -313,7 +313,7 @@ public class SignUpController implements Initializable {
                                 
                                 //(int spotOwnerId, int status, float rent, String address, int rating)
                                 
-                                ParkingSpot spot = new ParkingSpot(GeneratedOwnerId, 0, rent, licenseandAddress, (float) 0.0);
+                                ParkingSpot spot = new ParkingSpot(GeneratedOwnerId, 0, rent, licenseandAddress, (float) 0.0, (float) 0.0);
                                 
                                 db.addParkingSpot(spot);
                                 

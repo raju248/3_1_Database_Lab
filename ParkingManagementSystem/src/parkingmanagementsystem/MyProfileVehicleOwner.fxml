@@ -87,7 +87,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="160.0" prefHeight="50.0" prefWidth="472.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="156.0" text="Vehicle Model:" textFill="WHITE">
+                  <Label prefHeight="25.0" prefWidth="124.0" text="Vehicle Model:" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="ModelNo" prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
+                  <Label fx:id="ModelNo" prefHeight="25.0" prefWidth="462.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>

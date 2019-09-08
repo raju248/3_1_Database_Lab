@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bordePane" prefHeight="838.0" prefWidth="1066.0" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.VehicleOwnerMainMenuController">
+<BorderPane fx:id="bordePane" prefHeight="838.0" prefWidth="1066.0" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.ParkingSpotOwnerMainMenuController">
    <left>
       <VBox prefHeight="838.0" prefWidth="249.0" style="-fx-background-color: #00001a;" BorderPane.alignment="CENTER">
          <children>
@@ -22,7 +22,7 @@
                   <Insets bottom="90.0" left="50.0" />
                </VBox.margin>
             </ImageView>
-            <JFXButton fx:id="SearchParking" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#searchParkingButtonAction" prefHeight="31.0" prefWidth="285.0" styleClass="jfx-button-noBackGround" text="Home">
+            <JFXButton fx:id="Home" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#home" prefHeight="31.0" prefWidth="285.0" styleClass="jfx-button-noBackGround" text="Home">
                <font>
                   <Font size="15.0" />
                </font>
@@ -33,7 +33,8 @@
                </VBox.margin>
                <font>
                   <Font size="15.0" />
-               </font></JFXButton>
+               </font>
+            </JFXButton>
             <Separator prefHeight="19.0" prefWidth="220.0" />
             <JFXButton fx:id="Exit" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="403.0" prefHeight="31.0" prefWidth="278.0" styleClass="jfx-button-noBackGround" text="Exit">
                <font>
@@ -53,6 +54,7 @@
       <Pane fx:id="pane" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Separator layoutX="-6.0" orientation="VERTICAL" prefHeight="838.0" prefWidth="11.0" />
-         </children></Pane>
+         </children>
+      </Pane>
    </center>
 </BorderPane>

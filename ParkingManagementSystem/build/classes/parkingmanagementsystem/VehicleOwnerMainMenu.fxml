@@ -22,6 +22,11 @@
                   <Insets bottom="90.0" left="50.0" />
                </VBox.margin>
             </ImageView>
+            <JFXButton fx:id="SearchParking" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#searchParkingButtonAction" prefHeight="31.0" prefWidth="285.0" styleClass="jfx-button-noBackGround" text="Home">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
             <JFXButton fx:id="MyProfile" alignment="TOP_LEFT" buttonType="RAISED" onAction="#MyProfileButtonAction" prefHeight="31.0" prefWidth="255.0" styleClass="jfx-button-noBackGround" text="My Profile ">
                <VBox.margin>
                   <Insets />
@@ -29,11 +34,6 @@
                <font>
                   <Font size="15.0" />
                </font></JFXButton>
-            <JFXButton fx:id="SearchParking" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#searchParkingButtonAction" prefHeight="31.0" prefWidth="285.0" styleClass="jfx-button-noBackGround" text="Search Parking Spot">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </JFXButton>
             <Separator prefHeight="19.0" prefWidth="220.0" />
             <JFXButton fx:id="Exit" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="403.0" prefHeight="31.0" prefWidth="278.0" styleClass="jfx-button-noBackGround" text="Exit">
                <font>
@@ -50,7 +50,7 @@
       </VBox>
    </left>
    <center>
-      <Pane fx:id="pane" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
+      <Pane fx:id="pane" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Separator layoutX="-6.0" orientation="VERTICAL" prefHeight="838.0" prefWidth="11.0" />
          </children></Pane>

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="838.0" prefWidth="817.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="838.0" prefWidth="817.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.MyProfileSpotOwnerController">
    <children>
       <Label layoutX="313.0" layoutY="127.0" prefHeight="17.0" prefWidth="172.0" text="My Profile" textFill="WHITE">
          <font>
@@ -27,7 +27,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
+                  <Label fx:id="Name" prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
+                  <Label fx:id="PhoneNo" prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
+                  <Label fx:id="AccountType" prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -78,7 +78,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
+                  <Label fx:id="Rating" prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="22.0" prefWidth="368.0" text="Label" textFill="WHITE">
+                  <Label fx:id="Earnings" prefHeight="22.0" prefWidth="368.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -112,7 +112,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="25.0" prefWidth="324.0" text="Label" textFill="WHITE">
+                  <Label fx:id="Address" prefHeight="25.0" prefWidth="324.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -121,10 +121,15 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton layoutX="98.0" layoutY="613.0" prefHeight="33.0" prefWidth="629.0" ripplerFill="#fc8484" styleClass="jfx-button-white" text="Edit Profile">
+      <JFXButton fx:id="EditButton" layoutX="98.0" layoutY="613.0" onAction="#EditProfileButtonAction" prefHeight="33.0" prefWidth="629.0" ripplerFill="#fc8484" styleClass="jfx-button-white" text="Edit Profile">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
+      <Label layoutX="98.0" layoutY="561.0" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-button-noBackGround" text="Change Password" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

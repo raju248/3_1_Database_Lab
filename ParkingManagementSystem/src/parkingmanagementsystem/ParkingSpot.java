@@ -15,13 +15,19 @@ public class ParkingSpot {
     float rent;
     String address;
     float rating;
+    float earning;
 
-    public ParkingSpot(int spotOwnerId, int status, float rent, String address, float rating) {
+    public ParkingSpot(int spotOwnerId, int status, float rent, String address, float rating, float earning) {
         this.spotOwnerId = spotOwnerId;
         this.status = status;
         this.rent = rent;
         this.address = address;
         this.rating = rating;
+        this.earning = earning;
+    }
+
+    ParkingSpot() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getSpotOwnerId() {
@@ -62,6 +68,14 @@ public class ParkingSpot {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public float getEarning() {
+        return earning;
+    }
+
+    public void setEarning(float earning) {
+        this.earning = earning;
     }
     
     

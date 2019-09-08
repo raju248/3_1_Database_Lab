@@ -117,7 +117,13 @@ public class LoginPageController implements Initializable {
                     try {
                         Stage stage = (Stage) SignIn.getScene().getWindow();
                         String title = "Main Menu";
-                        LoadStages load = new LoadStages(stage, title, "VehicleOwnerMainMenu.fxml");
+                        LoadStages load;
+                        
+                        if(type==2)
+                             load = new LoadStages(stage, title, "VehicleOwnerMainMenu.fxml");
+                        else
+                            load = new LoadStages(stage, title, "ParkingSpotOwnerMainMenu.fxml");
+                        
                     } catch (IOException e) {
                         System.out.println(e);
                     }

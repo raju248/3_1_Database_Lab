@@ -18,6 +18,10 @@ public class ParkingSpotOwner {
         this.status = status;
     }
 
+    public ParkingSpotOwner() {
+        
+    }
+
     public int getUserId() {
         return userId;
     }

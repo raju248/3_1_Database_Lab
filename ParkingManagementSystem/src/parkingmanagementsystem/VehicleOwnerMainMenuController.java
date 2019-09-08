@@ -31,18 +31,12 @@ public class VehicleOwnerMainMenuController implements Initializable {
     @FXML
     private JFXButton MyProfile;
     @FXML
-    private JFXButton SearchParking;
-    @FXML
-    private JFXButton AddVehicle;
-    @FXML
-    private JFXButton AddParkingSpot;
-    @FXML
     private JFXButton Exit;
     @FXML
     private Pane pane;
 
     @FXML
-    private JFXTextArea textArea;
+    private JFXButton Home;
 
     /**
      * Initializes the controller class.

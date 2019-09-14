@@ -104,7 +104,7 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton fx:id="EditrButton" layoutX="86.0" layoutY="598.0" prefHeight="33.0" prefWidth="629.0" ripplerFill="#fc8484" styleClass="jfx-button-white" text="Edit Profile">
+      <JFXButton fx:id="EditButton" layoutX="86.0" layoutY="598.0" onAction="#EditButtonAction" prefHeight="33.0" prefWidth="629.0" ripplerFill="#fc8484" styleClass="jfx-button-white" text="Edit Profile">
          <font>
             <Font size="14.0" />
          </font>

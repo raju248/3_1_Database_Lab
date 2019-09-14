@@ -15,7 +15,7 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <VBox layoutX="98.0" layoutY="244.0" prefHeight="325.0" prefWidth="629.0">
+      <VBox layoutX="98.0" layoutY="215.0" prefHeight="354.0" prefWidth="629.0">
          <children>
             <HBox prefHeight="50.0" prefWidth="472.0">
                <children>
@@ -119,6 +119,34 @@
                   </Label>
                </children>
             </HBox>
+            <HBox layoutX="10.0" layoutY="260.0" prefHeight="50.0" prefWidth="472.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="132.0" text="Rent Per Hour :" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="RentPerHour" prefHeight="25.0" prefWidth="324.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <Label fx:id="changePassword" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-button-noBackGround" text="Change Password" underline="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Label>
          </children>
       </VBox>
       <JFXButton fx:id="EditButton" layoutX="98.0" layoutY="613.0" onAction="#EditProfileButtonAction" prefHeight="33.0" prefWidth="629.0" ripplerFill="#fc8484" styleClass="jfx-button-white" text="Edit Profile">
@@ -126,10 +154,5 @@
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <Label layoutX="98.0" layoutY="561.0" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-button-noBackGround" text="Change Password" underline="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

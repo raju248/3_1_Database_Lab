@@ -12,7 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,11 +45,15 @@ public class MyProfileSpotOwnerController implements Initializable {
     private Label Address;
     @FXML
     private JFXButton EditButton;
+    @FXML
+    private Label changePassword;
+    @FXML
+    private Label RentPerHour;
 
     Users user = LoginPageController.loggedUser;
     ParkingSpot spot;
     ParkingSpotOwner owner = new ParkingSpotOwner();
-    
+
     DatabaseHelper db = new DatabaseHelper();
 
     /**
@@ -59,8 +66,28 @@ public class MyProfileSpotOwnerController implements Initializable {
         Name.setText(user.getName());
         PhoneNo.setText(user.getPhoneNo());
         AccountType.setText("Parking Spot Owner");
-        
+
         getDataFromTable();
+
+        changePassword.setOnMouseClicked((e)
+                -> {
+            AnchorPane root = null;
+
+            Pane parent = (Pane) EditButton.getParent();
+
+           
+            try {
+                root = FXMLLoader.load(getClass().getResource("changePassword.fxml"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+          
+
+            root.prefHeightProperty().bind(parent.heightProperty());
+            root.prefWidthProperty().bind(parent.widthProperty());
+
+            parent.getChildren().add(root);
+        });
 
     }
 
@@ -71,47 +98,42 @@ public class MyProfileSpotOwnerController implements Initializable {
                 + "left join ParkingSpot on \n"
                 + "ParkingSpot.SpotOwnerId = ParkingSpotOwner.SpotOwnerId\n"
                 + "where Users.PhoneNo = ?";
-        
-        
-        
-         try
-        {
+
+        try {
             db.connectDB();
-            
-            PreparedStatement ps =  db.connection.prepareStatement(sql);
-            
+
+            PreparedStatement ps = db.connection.prepareStatement(sql);
+
             ps.setString(1, user.getPhoneNo());
-            
-            
+
             ResultSet resultSet = ps.executeQuery();
-            
-            if(resultSet.next())
-            {
+
+            if (resultSet.next()) {
                 float rating = resultSet.getFloat("Rating");
-                
-                if(rating==0.0)
+
+                if (rating == 0.0) {
                     Rating.setText("N/A");
-                else
-                    Rating.setText(String.valueOf(rating));
-                
+                } else {
+                    Rating.setText(String.valueOf(rating) + "/5");
+                }
+
                 float earnings = resultSet.getFloat("Earnings");
-                
-                if(earnings == 0.0)
+
+                if (earnings == 0.0) {
                     Earnings.setText("N/A");
-                else
-                    Earnings.setText(String.valueOf(earnings));
-                
+                } else {
+                    Earnings.setText(String.valueOf(earnings) + " Tk.");
+                }
+
                 Address.setText(resultSet.getString("Address"));
-                
+
+                RentPerHour.setText(resultSet.getString("Rent") + " Tk.");
+
                 //spot = new ParkingSpot(resultSet.getString("SpotOwnerId"),resultSet.getInt("Status"),);
             }
-        }
-        catch(Exception e)
-        {
-            
-        }
-         
-                 finally {
+        } catch (Exception e) {
+
+        } finally {
             try {
                 if (db.connection != null) {
                     db.connection.close();
@@ -121,25 +143,25 @@ public class MyProfileSpotOwnerController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     void EditProfileButtonAction(ActionEvent event) {
-       AnchorPane root = null;
-       
-       Pane parent = (Pane) EditButton.getParent();
-       
-       try {
+        AnchorPane root = null;
+
+        Pane parent = (Pane) EditButton.getParent();
+
+        try {
             root = FXMLLoader.load(getClass().getResource("EditProfileParkingSpotOwner.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             //System.out.println(e.toString());
         }
-       
+
         root.prefHeightProperty().bind(parent.heightProperty());
         root.prefWidthProperty().bind(parent.widthProperty());
 
         parent.getChildren().add(root);
-       
+
     }
 
 }

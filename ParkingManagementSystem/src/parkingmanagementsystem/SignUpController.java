@@ -216,6 +216,13 @@ public class SignUpController implements Initializable {
         
         boolean mobileNoExists = false;
         boolean VehicleExists = false;
+        
+        if(password.length()<6)
+        {
+            PasswordNotLongText.setVisible(true);
+            Password.requestFocus();
+            return;
+        }
 
         if (mobileNo.length() == 11) {
             String sql = "SELECT * FROM Users WHERE PhoneNo = '" + mobileNo + "'";

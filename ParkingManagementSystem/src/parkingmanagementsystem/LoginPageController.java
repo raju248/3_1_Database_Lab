@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,6 +46,21 @@ public class LoginPageController implements Initializable {
     
     static Users loggedUser;
     
+//    Task<Integer> task = new Task<Integer>() {
+//         @Override protected Integer call() throws Exception {
+//             int iterations;
+//             for (iterations = 0; iterations < 100000; iterations++) {
+//                 
+//                 if (isCancelled()) {
+//                     break;
+//                 }
+//                 System.out.println("Iteration " + iterations);
+//             }
+//             return iterations;
+//         }
+//     };
+//    
+    
 
     /**
      * Initializes the controller class.
@@ -67,6 +83,10 @@ public class LoginPageController implements Initializable {
         Password.textProperty().addListener((observable, oldValue, newValue) -> {
             IncorrectLabel.setVisible(false);
         });
+        
+//        Thread t = new Thread(task);
+//        t.start();
+        
     }
 
     @FXML

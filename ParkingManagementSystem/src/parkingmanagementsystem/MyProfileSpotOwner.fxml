@@ -19,7 +19,7 @@
          <children>
             <HBox prefHeight="50.0" prefWidth="472.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="71.0" text="Name : " textFill="WHITE">
+                  <Label prefHeight="25.0" prefWidth="81.0" text="Name : " textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -27,7 +27,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="Name" prefHeight="17.0" prefWidth="414.0" text="Label" textFill="WHITE">
+                  <Label fx:id="Name" prefHeight="25.0" prefWidth="438.0" text="Label" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -138,6 +138,23 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="286.0" prefHeight="50.0" prefWidth="472.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="87.0" text="Status :" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="Status" prefHeight="25.0" prefWidth="260.0" text="Online" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
             </HBox>
             <Label fx:id="changePassword" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-button-noBackGround" text="Change Password" underline="true">
                <font>

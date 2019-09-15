@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.ProgressBar?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="838.0" prefWidth="817.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.ParkingSpotOwnerHomeController">
+   <children>
+      <Label layoutX="348.0" layoutY="118.0" prefHeight="51.0" prefWidth="100.0" text="Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="GoOnlineButton" layoutX="163.0" layoutY="552.0" prefHeight="47.0" prefWidth="506.0" styleClass="jfx-button-white" text="Go Online">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="StatusLabel" alignment="CENTER" layoutX="251.0" layoutY="273.0" prefHeight="36.0" prefWidth="305.0" text="You are online!" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="Progressbar" layoutX="298.0" layoutY="371.0" prefHeight="9.0" prefWidth="200.0" />
+      <Label fx:id="IndicatorLabel" layoutX="256.0" layoutY="391.0" prefHeight="34.0" prefWidth="284.0" text="Looking for parking request" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

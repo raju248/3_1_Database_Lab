@@ -49,6 +49,10 @@ public class MyProfileSpotOwnerController implements Initializable {
     private Label changePassword;
     @FXML
     private Label RentPerHour;
+    
+    @FXML
+    private Label Status;
+
 
     Users user = LoginPageController.loggedUser;
     ParkingSpot spot;
@@ -128,6 +132,17 @@ public class MyProfileSpotOwnerController implements Initializable {
                 Address.setText(resultSet.getString("Address"));
 
                 RentPerHour.setText(resultSet.getString("Rent") + " Tk.");
+                
+                
+                
+                if(resultSet.getInt(12)==1)
+                {
+                    Status.setText("Online");
+                }
+                else
+                {
+                    Status.setText("Offline");
+                }
 
                 //spot = new ParkingSpot(resultSet.getString("SpotOwnerId"),resultSet.getInt("Status"),);
             }

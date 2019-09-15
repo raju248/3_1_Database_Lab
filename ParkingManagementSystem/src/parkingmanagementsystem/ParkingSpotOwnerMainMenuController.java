@@ -41,11 +41,36 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        loadHome();
+        
     }    
 
+    
+    void loadHome()
+    {
+        AnchorPane root = null;
+
+        System.out.println("Profile");
+
+        try {
+            root = FXMLLoader.load(getClass().getResource("ParkingSpotOwnerHome.fxml"));
+        } catch (IOException e) {
+            // e.printStackTrace();
+            System.out.println(e.toString());
+        }
+
+        root.prefHeightProperty().bind(pane.heightProperty());
+        root.prefWidthProperty().bind(pane.widthProperty());
+
+        pane.getChildren().add(root);
+        bordePane.setRight(null);
+        bordePane.setTop(null);
+    }
+    
      @FXML
     void home(ActionEvent event) {
-
+            loadHome();
     }
 
     @FXML

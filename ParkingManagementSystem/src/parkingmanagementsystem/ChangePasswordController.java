@@ -80,15 +80,15 @@ public class ChangePasswordController implements Initializable {
             return;
         }
 
-        if (oldpassword.equals(user.getPassword())) {
+        if (!oldpassword.equals(user.getPassword())) {
             oldPassword.requestFocus();
             currentPasswordNotMatch.setVisible(true);
             return;
         }
 
         if (oldpassword.equals(user.getPassword()) && newpassword.length() >= 6) {
-            String sql = "update users set Password = " + newpassword + "where Password = " + oldpassword;
-
+            String sql = "update users set Password = " + newpassword + " where Password = " + oldpassword+" and PhoneNo = " + user.getPhoneNo();
+            
             db.connectDB();
 
             try {

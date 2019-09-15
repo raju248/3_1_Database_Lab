@@ -14,7 +14,7 @@ import java.sql.*;
 public class DatabaseHelper {
 
     public static String USERNAME = "sa";
-    public static String PASSWORD = "22448800";
+    public static String PASSWORD = "123456";
     public static String PATH = "jdbc:sqlserver://localhost:1433;databaseName=ParkingManagementSystem;selectMethod=cursor";
 
     Connection connection = null;

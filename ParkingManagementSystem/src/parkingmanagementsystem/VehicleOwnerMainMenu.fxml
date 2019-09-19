@@ -22,7 +22,7 @@
                   <Insets bottom="90.0" left="50.0" />
                </VBox.margin>
             </ImageView>
-            <JFXButton fx:id="SearchParking" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#searchParkingButtonAction" prefHeight="31.0" prefWidth="285.0" styleClass="jfx-button-noBackGround" text="Home">
+            <JFXButton fx:id="SearchParking" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#Home" prefHeight="31.0" prefWidth="285.0" styleClass="jfx-button-noBackGround" text="Home">
                <font>
                   <Font size="15.0" />
                </font>
@@ -52,7 +52,7 @@
    <center>
       <Pane fx:id="pane" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Separator layoutX="-6.0" orientation="VERTICAL" prefHeight="838.0" prefWidth="11.0" />
+            <Separator fx:id="seperator" layoutX="-6.0" orientation="VERTICAL" prefHeight="838.0" prefWidth="11.0" />
          </children></Pane>
    </center>
 </BorderPane>

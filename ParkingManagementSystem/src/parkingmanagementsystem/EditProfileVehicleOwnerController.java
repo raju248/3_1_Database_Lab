@@ -182,7 +182,7 @@ public class EditProfileVehicleOwnerController implements Initializable {
 
             if (row > 0) {
                 update2 = true;
-                System.out.println("Updated ParkingSpot");
+                System.out.println("Updated Vehicle");
             }
 
         } catch (Exception e) {

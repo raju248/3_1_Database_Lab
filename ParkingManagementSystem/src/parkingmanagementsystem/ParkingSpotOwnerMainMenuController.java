@@ -9,10 +9,13 @@ import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -34,22 +37,43 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
     private JFXButton Exit;
     @FXML
     private Pane pane;
-
+    
+//    @FXML
+//    private AnchorPane HomePage;
+//    
+//    @FXML 
+//    private AnchorPane Profile;
+    
+    AnchorPane HomePage, Profile;
+    @FXML
+    private Separator seperator;
+    
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
-        loadHome();
-        
+        try {
+            // TODO
+            
+            // loadHome();
+            //HomePage.setVisible(true);
+            //Profile.setVisible(false);
+            HomePage = FXMLLoader.load(getClass().getResource("ParkingSpotOwnerHome.fxml"));
+            //Profile = FXMLLoader.load(getClass().getResource("ParkingSpotOwnerMainMenu.fxml"));
+            pane.getChildren().add(0, HomePage);
+        } catch (IOException ex) {
+            Logger.getLogger(ParkingSpotOwnerMainMenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
     }    
 
     
     void loadHome()
     {
-        AnchorPane root = null;
+        /*AnchorPane root = null;
 
         System.out.println("Profile");
 
@@ -65,12 +89,17 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
 
         pane.getChildren().add(root);
         bordePane.setRight(null);
+        bordePane.setTop(null);*/
+        pane.getChildren().clear();
+        pane.getChildren().addAll(seperator, HomePage);
+        bordePane.setRight(null);
         bordePane.setTop(null);
     }
     
-     @FXML
+    @FXML
     void home(ActionEvent event) {
             loadHome();
+            
     }
 
     @FXML
@@ -90,9 +119,11 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
         root.prefHeightProperty().bind(pane.heightProperty());
         root.prefWidthProperty().bind(pane.widthProperty());
 
-        pane.getChildren().add(root);
+        pane.getChildren().clear();
+        pane.getChildren().addAll(seperator,root);
         bordePane.setRight(null);
         bordePane.setTop(null);
+       // pane.getChildren().add(0, Profile);
         
     }
     

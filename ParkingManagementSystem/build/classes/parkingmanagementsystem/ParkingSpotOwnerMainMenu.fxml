@@ -53,7 +53,16 @@
    <center>
       <Pane fx:id="pane" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Separator layoutX="-6.0" orientation="VERTICAL" prefHeight="838.0" prefWidth="11.0" />
+            <Separator fx:id="seperator" layoutX="-6.0" orientation="VERTICAL" prefHeight="838.0" prefWidth="11.0" />
+            
+<!--            <AnchorPane>
+		 <fx:include source="ParkingSpotOwnerHome.fxml" fx:id="HomePage"/>
+            </AnchorPane>
+            
+            <AnchorPane>
+		 <fx:include source="MyProfileSpotOwner.fxml" fx:id="Profile"/>
+            </AnchorPane>
+            -->
          </children>
       </Pane>
    </center>

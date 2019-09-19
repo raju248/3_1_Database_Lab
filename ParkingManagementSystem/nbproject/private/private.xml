@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/SearchSpotController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/VehicleOwnerMainMenuController.java</file>
             <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/MyProfileSpotOwnerController.java</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/EditProfileVehicleOwnerController.java</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/LoginPageController.java</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/ParkingSpotOwnerHomeController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/spotFound.fxml</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/VehicleOwnerHomeController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/VehicleOwnerHome.fxml</file>
             <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/ParkingSpotOwnerMainMenuController.java</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/DatabaseHelper.java</file>
             <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/ParkingSpotOwnerHome.fxml</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/searchSpot.fxml</file>
             <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/EditProfileVehicleOwner.fxml</file>
         </group>
     </open-files>

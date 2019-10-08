@@ -89,6 +89,8 @@ public class YourParkingPermanentSpotController implements Initializable {
     int selectedId = 0;
     @FXML
     private AnchorPane anchorPane;
+    
+    ObservableList<PermanentParkingSpot> list = FXCollections.observableArrayList();
 
     class XCell extends ListCell<PermanentParkingSpot> {
 
@@ -271,7 +273,13 @@ public class YourParkingPermanentSpotController implements Initializable {
         
         Edit.setOnAction(e->
         {
-            EditData();
+            if(list.size()>0)
+                         EditData();
+        });
+        
+        Delete.setOnAction(e->
+        {
+            DeleteData();
         });
     }
 
@@ -370,11 +378,13 @@ public class YourParkingPermanentSpotController implements Initializable {
                 anchorPane.setEffect(null);
 
                 if (result.get() == ButtonType.OK) {
+                    ListView.getItems().clear();
                     loadData();
                     init();
                 }
                 else
                 {
+                    ListView.getItems().clear();
                     loadData();
                     init();
                 }
@@ -398,12 +408,61 @@ public class YourParkingPermanentSpotController implements Initializable {
     }
 
     void DeleteData() {
+        
+        String sql = "Delete from Ads where AddID = " + selectedId;
+        
+        DatabaseHelper dbc = new DatabaseHelper();
+        try {
+            dbc.connectDB();
+            PreparedStatement ps = dbc.connection.prepareStatement(sql);
 
+            int row = ps.executeUpdate();
+
+            if (row > 0) {
+                anchorPane.setEffect(new BoxBlur(1, 1, 1));
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Deleted successfully!");
+                alert.setHeaderText("Press OK if you want to continue");
+
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add("GeniunCoder.css");
+                dialogPane.getStyleClass().add("alert");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                anchorPane.setEffect(null);
+
+                if (result.get() == ButtonType.OK) {
+                    ListView.getItems().clear();
+                    loadData();
+                    init();
+                }
+                else
+                {
+                    ListView.getItems().clear();
+                    loadData();
+                    init();
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(YourParkingPermanentSpotController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            if(dbc.connection!=null)
+            {
+                try {
+                    dbc.connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(YourParkingPermanentSpotController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     public void loadData() {
 
-        ObservableList<PermanentParkingSpot> list = FXCollections.observableArrayList();
+        
 
         c.connectDB();
         try {

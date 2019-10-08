@@ -125,14 +125,15 @@ public class LoginPageController implements Initializable {
 //                        System.out.println(resultSet.getString("Name"));
 //                        System.out.println(resultSet.getString("MobileNo"));
 //                        System.out.println(resultSet.getString("Password"));
-                            String userId = resultSet.getString("UserId");
+                            int userId = resultSet.getInt("UserId");
                             String name = resultSet.getString("Name");
                             String pass = resultSet.getString("Password");
                             String mobile = resultSet.getString("PhoneNo");
                             int type = resultSet.getInt("Type");
                             
 
-                            loggedUser = new Users(name, mobile, pass, type);
+                            loggedUser = new Users(userId, name, mobile, pass, type);
+                            
 
                     try {
                         Stage stage = (Stage) SignIn.getScene().getWindow();

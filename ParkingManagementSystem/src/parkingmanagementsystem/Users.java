@@ -12,8 +12,20 @@ package parkingmanagementsystem;
 public class Users {
     String name, phoneNo, password;
     int type;
+    int userId ;
 
-    public Users(String name, String phoneNo, String password, int type) {
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    
+
+    public Users(int userId, String name, String phoneNo, String password, int type) {
+        
+        this.userId = userId;
         this.name = name;
         this.phoneNo = phoneNo;
         this.password = password;
@@ -51,6 +63,9 @@ public class Users {
     public void setType(int type) {
         this.type = type;
     }
+    
+    
+    
     
     
 }

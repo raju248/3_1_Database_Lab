@@ -6,6 +6,9 @@
 package parkingmanagementsystem;
 
 import java.sql.*;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,6 +37,9 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
     }
+    
+    
+
 
     public void read() {
         try {
@@ -290,4 +296,50 @@ public class DatabaseHelper {
             }
         }
     }
+    
+    
+ 
+    public int AddPermanentParkingSpot(PermanentParkingSpot spot) {
+        try {
+            connectDB();
+            String sql = "INSERT INTO Ads (Address, Rent, Guard, Contact, SpotOwnerId, AddedDate) VALUES (?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            statement.setString(1, spot.getAddress());
+            statement.setInt(2, spot.getRent());
+            statement.setInt(3, spot.getGuard());
+            statement.setString(4,spot.getPhoneNo());
+            statement.setInt(5, spot.getSpotOwnerId());
+            
+            Calendar cal = Calendar.getInstance();
+            java.sql.Timestamp timestamp = new java.sql.Timestamp(cal.getTimeInMillis());
+            statement.setTimestamp(6, timestamp);
+            
+
+            int rowsInserted = statement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                //System.out.println("A new user was inserted successfully in parking spot table");
+                return 1;
+
+            } else {
+                System.out.println("User already exists");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+    
+    
+   
 }

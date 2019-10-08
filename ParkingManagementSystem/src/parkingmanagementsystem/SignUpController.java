@@ -282,7 +282,7 @@ public class SignUpController implements Initializable {
                         anchorPane.setEffect(null); 
                         
                         
-                        Users user = new Users(name, mobileNo, password, userType);
+                        Users user = new Users(0,name, mobileNo, password, userType);
                         
                         if (result.get() == ButtonType.OK) {
                             

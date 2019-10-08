@@ -1,5 +1,5 @@
 .anchor-pane{
-	-fx-background-color:  #00001a;
+    -fx-background-color:  #00001a;
 }
 
 label-white{
@@ -13,7 +13,7 @@ label-white{
 
 .alert:header *.header-panel{
     -fx-background-color: #00001a;
-    
+
 }
 .alert:header *.header-panel *.label{
     -fx-font-size: 18px;
@@ -23,57 +23,57 @@ label-white{
 }
 
 .jfx-button-black{   
-      -fx-background-color : black;
-      -fx-text-fill: white;
-      -jfx-button-type : RAISED;
+    -fx-background-color : black;
+    -fx-text-fill: white;
+    -jfx-button-type : RAISED;
 }
 
 .jfx-button-black:hover{   
-      -fx-background-color : white;
-      -fx-text-fill: black;
+    -fx-background-color : white;
+    -fx-text-fill: black;
 }
 
 
 .jfx-button-white{   
-      -fx-background-color : white;
-      -fx-text-fill: black;
-      -jfx-button-type : RAISED;
+    -fx-background-color : white;
+    -fx-text-fill: black;
+    -jfx-button-type : RAISED;
 }
 
 .jfx-button-white:hover{   
-      -fx-background-color : black;
-      -fx-text-fill: white;
+    -fx-background-color : black;
+    -fx-text-fill: white;
 }
 
 .jfx-button-noBackGround{   
-      -fx-text-fill: white;
-      /*-jfx-button-type : RAISED;*/
+    -fx-text-fill: white;
+    /*-jfx-button-type : RAISED;*/
 }
 
 .jfx-button-noBackGround:hover {   
-      -fx-background-color : white;
-      -fx-text-fill: black;
+    -fx-background-color : white;
+    -fx-text-fill: black;
 }
 
 
 .jfx-button-noBackGround:focused {   
-      -fx-background-color : white;
-      -fx-text-fill: black;
+    -fx-background-color : white;
+    -fx-text-fill: black;
 }
 
 
 .jfx-button .jfx-rippler{
-      -jfx-rippler-fill: #433d3d;
+    -jfx-rippler-fill: #433d3d;
 }
 
 .jfx-text-field
 {
-	
+
 }
 
 
 .waring-text{
-	-fx-text-fill : #ff5a5a;
+    -fx-text-fill : #ff5a5a;
 }
 
 
@@ -85,4 +85,108 @@ label-white{
 .signup-label:hover{
     -fx-background-color:white;
     -fx-text-fill: black;
+}
+
+.list-view
+{
+    -fx-background-insets: 0;
+    -fx-cell-vertical-margin: 10.0;
+    -fx-vertical-gap: 10;
+}
+
+
+/*
+.fx-list-cell
+{
+    -fx-background-insets: 0.0;
+    -fx-border-radius : 1.0;
+    -fx-border-color : red;
+   
+    -fx-margin:10;
+}*/
+
+.list-view .list-cell .vbox
+{
+     display: inline-block;
+    -fx-min-width: 80px;
+    -fx-min-height: 50px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+
+    -fx-border-insets: 10;
+    -fx-border-radius: 1;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+   
+}
+
+
+
+.list-view .list-cell:odd {
+    -fx-background-color: #e9ebf0;
+    -fx-text-fill: black;
+}
+
+.list-cell .jfx-rippler
+{
+    -fx-rippler-fill: BLUE;
+}
+
+.list-view .list-cell:empty
+{
+    -fx-background-color : transparent;
+}
+
+.list-view .list-cell:hover
+{
+    -fx-background-color: #95a5bf;
+    -fx-text-fill: black;
+}
+
+.list-view .list-cell:focused
+{
+    -fx-background-color: grey;
+    -fx-text-fill: black !important;
+}
+
+
+
+.jfx-rippler {
+    -jfx-rippler-fill: red;
+}
+
+
+.rating > .container > .button {
+  -fx-background-image: url("stare.png");
+   -fx-pref-width: 20 ;
+   -fx-pref-height: 10 ;
+   -fx-font-size: 10px;
+}
+
+.rating > .container > .button.strong {
+  -fx-background-image: url("star.png");
+   -fx-pref-width: 20 ;
+   -fx-pref-height: 10 ;
+   -fx-font-size: 10px;
+}
+
+
+.rating:disabled > .container > .button {
+  -fx-background-image: url("stare.png");
+  -fx-opacity: 1.0;
+  -fx-pref-width: 20 ;
+            -fx-pref-height: 10 ;
+  -fx-font-size: 10px;
+}
+
+.rating:disabled > .container > .button.strong {
+  -fx-background-image: url("star.png");
+    -fx-opacity: 1.0;
+     -fx-pref-width: 20 ;
+            -fx-pref-height: 10 ;
+            -fx-font-size: 10px;
+
 }

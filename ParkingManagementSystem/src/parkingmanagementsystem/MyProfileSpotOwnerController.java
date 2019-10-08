@@ -57,6 +57,7 @@ public class MyProfileSpotOwnerController implements Initializable {
     Users user = LoginPageController.loggedUser;
     ParkingSpot spot;
     ParkingSpotOwner owner = new ParkingSpotOwner();
+    int spotOwnerId = 0;
 
     DatabaseHelper db = new DatabaseHelper();
 
@@ -72,6 +73,7 @@ public class MyProfileSpotOwnerController implements Initializable {
         AccountType.setText("Parking Spot Owner");
 
         getDataFromTable();
+        totalEarning();
 
         changePassword.setOnMouseClicked((e)
                 -> {
@@ -121,19 +123,12 @@ public class MyProfileSpotOwnerController implements Initializable {
                     Rating.setText(String.valueOf(rating) + "/5");
                 }
 
-                float earnings = resultSet.getFloat("Earnings");
-
-                if (earnings == 0.0) {
-                    Earnings.setText("N/A");
-                } else {
-                    Earnings.setText(String.valueOf(earnings) + " Tk.");
-                }
-
                 Address.setText(resultSet.getString("Address"));
 
                 RentPerHour.setText(resultSet.getString("Rent") + " Tk.");
                 
-                
+                //System.out.println(resultSet.getInt("SpotOwnerId"));
+                spotOwnerId = resultSet.getInt("SpotOwnerId");
                 
                 if(resultSet.getInt(12)==1)
                 {
@@ -157,6 +152,40 @@ public class MyProfileSpotOwnerController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+    
+    void totalEarning()
+    {
+        db.connectDB();
+        
+        String sql = " select SUM(TotalAmount) as total from ParkingRequests where ReceiverId = "+ spotOwnerId ;
+        
+        try {
+            PreparedStatement ps = db.connection.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                int earn = rs.getInt(1);
+                
+                
+                if(earn == 0)
+                {
+                    Earnings.setText("N/A");
+                }
+                else
+                {
+                    Earnings.setText(String.valueOf(earn)+" Tk.");
+                }
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MyProfileSpotOwnerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 
     @FXML

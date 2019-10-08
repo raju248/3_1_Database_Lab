@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.ProgressBar?>
+<?import com.gluonhq.charm.glisten.control.ProgressIndicator?>
+<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="546.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.VehicleOwnerHomeController">
+   <children>
+      <Label layoutX="203.0" prefHeight="31.0" prefWidth="100.0" text="Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Pane fx:id="Pane" layoutX="85.0" layoutY="96.0" prefHeight="402.0" prefWidth="376.0" style="-fx-background-color: white;">
+         <children>
+            <AnchorPane id="AnchorPane" fx:id="pane2" prefHeight="402.0" prefWidth="370.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="66.0" layoutY="21.0" text="Parking Spot Found!!">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="82.0" prefHeight="25.0" prefWidth="77.0" text="Address : ">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXTextArea fx:id="address1" editable="false" layoutX="91.0" layoutY="79.0" prefHeight="75.0" prefWidth="262.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextArea>
+                  <Label layoutX="14.0" layoutY="172.0" prefHeight="25.0" prefWidth="138.0" text="Rent (Per Hour) :">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="217.0" prefHeight="25.0" prefWidth="87.0" text="Owner : ">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Owner" layoutX="85.0" layoutY="216.0" prefHeight="25.0" prefWidth="262.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="rent" layoutX="152.0" layoutY="172.0" prefHeight="25.0" prefWidth="87.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="cancelButton" layoutX="27.0" layoutY="334.0" prefHeight="35.0" prefWidth="324.0" styleClass="jfx-button-black" stylesheets="@../GeniunCoder.css" text="Cancel">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="14.0" layoutY="291.0" text="Rating :">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Rating" layoutX="91.0" layoutY="293.0" prefHeight="17.0" prefWidth="87.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="259.0" prefHeight="25.0" prefWidth="100.0" text="Phone No : ">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="PhoneNo" layoutX="114.0" layoutY="259.0" prefHeight="25.0" prefWidth="240.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="FinalPane" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="376.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="104.0" layoutY="20.0" prefHeight="25.0" prefWidth="163.0" text="Parking Completed!!">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="42.0" layoutY="65.0" prefHeight="282.0" prefWidth="286.0">
+                     <children>
+                        <HBox prefHeight="52.0" prefWidth="286.0">
+                           <children>
+                              <Label alignment="BASELINE_CENTER" prefHeight="37.0" prefWidth="66.0" text="Address:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextArea fx:id="address21" prefHeight="51.0" prefWidth="217.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXTextArea>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="286.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="124.0" text="Rent (per hour):">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="rent2" layoutX="10.0" layoutY="10.0" prefHeight="21.0" prefWidth="149.0" text="Rent (per hour):">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="39.0" prefWidth="286.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="66.0" text="Owner:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="owner2" layoutX="10.0" layoutY="10.0" prefHeight="21.0" prefWidth="223.0" text="Owner:" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="124.0" prefHeight="39.0" prefWidth="286.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="119.0" text="Start Time :">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="StartTime1" layoutX="10.0" layoutY="10.0" prefHeight="21.0" prefWidth="213.0" text="Starttime" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="163.0" prefHeight="39.0" prefWidth="286.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="98.0" text="End Time :">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="EndTime1" layoutX="10.0" layoutY="10.0" prefHeight="21.0" prefWidth="213.0" text="endTime" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="202.0" prefHeight="36.0" prefWidth="286.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="188.0" text="Amount to Pay :">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Amount" layoutX="10.0" layoutY="10.0" prefHeight="21.0" prefWidth="213.0" text="amount" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="23.0" prefWidth="286.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="108.0" text="Rate service :">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Rating fx:id="star" prefHeight="20.0" prefWidth="176.0" rating="0.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <JFXButton fx:id="DoneButton" layoutX="42.0" layoutY="363.0" prefHeight="25.0" prefWidth="286.0" styleClass="jfx-button-black" stylesheets="@../GeniunCoder.css" text="Done">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="AnchorPane" fx:id="StatusPane" prefHeight="402.0" prefWidth="370.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="40.0" layoutY="25.0" text="Your Vehicle is Parked!!!">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="74.0" prefHeight="25.0" prefWidth="77.0" text="Address : ">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXTextArea fx:id="address2" editable="false" layoutX="91.0" layoutY="71.0" prefHeight="75.0" prefWidth="262.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextArea>
+                  <Label layoutX="14.0" layoutY="197.0" prefHeight="25.0" prefWidth="138.0" text="Rent (Per Hour) :">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="239.0" prefHeight="25.0" prefWidth="77.0" text="Owner : ">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Owner1" layoutX="91.0" layoutY="240.0" prefHeight="25.0" prefWidth="183.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="rent1" layoutX="152.0" layoutY="197.0" prefHeight="25.0" prefWidth="87.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="318.0" prefHeight="25.0" prefWidth="100.0" text="Start Time : ">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="StartTime" layoutX="114.0" layoutY="318.0" prefHeight="25.0" prefWidth="192.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="282.0" prefHeight="25.0" prefWidth="100.0" text="Phone No : ">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="PhoneNo1" layoutX="101.0" layoutY="284.0" prefHeight="25.0" prefWidth="174.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ProgressIndicator fx:id="circle" layoutX="152.0" layoutY="186.0" radius="20.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane id="AnchorPane" fx:id="aPane" layoutY="-2.0" prefHeight="402.0" prefWidth="376.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="33.0" layoutY="32.0" text="Area to look for :">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="address" layoutX="33.0" layoutY="60.0" prefHeight="37.0" prefWidth="183.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton fx:id="searchButton" layoutX="228.0" layoutY="60.0" prefHeight="25.0" prefWidth="127.0" styleClass="jfx-button-black" stylesheets="@../GeniunCoder.css" text="Search">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <VBox fx:id="vbox" layoutX="26.0" layoutY="234.0" prefHeight="162.0" prefWidth="324.0">
+                     <children>
+                        <ProgressBar fx:id="progressBar" prefHeight="13.0" prefWidth="310.0">
+                           <VBox.margin>
+                              <Insets left="30.0" right="30.0" />
+                           </VBox.margin>
+                        </ProgressBar>
+                        <Label fx:id="spotSearchingLabel" alignment="CENTER" prefHeight="31.0" prefWidth="324.0" text="Looking for parking spot!">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="cancel" alignment="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="152.0" styleClass="jfx-button-black" stylesheets="@../GeniunCoder.css" text="Stop Searching">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="70.0" right="40.0" top="50.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <ToggleButtonGroup fx:id="group" layoutX="63.0" layoutY="116.0" prefHeight="20.0" prefWidth="262.0" selectionType="SINGLE">
+                     <toggles>
+                        <JFXRadioButton fx:id="instantButton" prefHeight="17.0" prefWidth="132.0" text="Permanent">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           
+                              </JFXRadioButton>
+                        
+                              <JFXRadioButton fx:id="permanentButton" prefHeight="17.0" prefWidth="126.0" text="Instant">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding>
+                        </JFXRadioButton>
+                     </toggles>
+                  </ToggleButtonGroup>
+                  <JFXCheckBox fx:id="guardCheck" layoutX="114.0" layoutY="159.0" prefHeight="20.0" prefWidth="138.0" text="Secuirty Guard">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXCheckBox>
+               </children>
+            </AnchorPane>
+         </children></Pane> 
+      
+    
+   </children>
+</AnchorPane>

@@ -12,6 +12,7 @@ package parkingmanagementsystem;
 public class ParkingSpotOwner {
     int userId;
     int status;
+    int SpotOwerId;
 
     public ParkingSpotOwner(int userId, int status) {
         this.userId = userId;
@@ -37,6 +38,15 @@ public class ParkingSpotOwner {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public int getSpotOwerId() {
+        return SpotOwerId;
+    }
+
+    public void setSpotOwerId(int SpotOwerId) {
+        this.SpotOwerId = SpotOwerId;
+    }
+    
     
     
 }

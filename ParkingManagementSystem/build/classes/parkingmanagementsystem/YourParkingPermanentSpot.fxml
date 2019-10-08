@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="777.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.YourParkingPermanentSpotController">
+   <children>
+      <JFXListView fx:id="ListView" fixedCellSize="0.0" layoutX="374.0" layoutY="86.0" prefHeight="500.0" prefWidth="375.0" stylesheets="@../GeniunCoder.css" />
+      <Label fx:id="Label" alignment="CENTER" layoutX="197.0" layoutY="21.0" prefHeight="39.0" prefWidth="448.0" text="Your Permanent Parking Spots" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="28.0" layoutY="86.0" prefHeight="500.0" prefWidth="338.0" style="-fx-background-color: white;">
+         <children>
+            <GridPane layoutX="36.0" layoutY="67.0" prefHeight="383.0" prefWidth="267.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="44.0" minHeight="4.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="0.0" prefHeight="62.0" valignment="BOTTOM" vgrow="ALWAYS" />
+                  <RowConstraints maxHeight="103.0" minHeight="9.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="52.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <JFXTextArea fx:id="Address" labelFloat="true" prefHeight="77.0" prefWidth="267.0" promptText="Address">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextArea>
+                  <Label fx:id="addressNeededLabel" prefHeight="17.0" prefWidth="136.0" text="Address needed!" textFill="RED" GridPane.rowIndex="1" />
+                  <Label fx:id="InvalidRentLabel" text="Invalid Rent" textFill="RED" GridPane.rowIndex="3" />
+                  <Label fx:id="selectGuardLabel" prefHeight="17.0" prefWidth="87.0" text="Select a option" textFill="RED" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="131.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="invalidPhoneNoLabel" prefHeight="17.0" prefWidth="247.0" text="Inavalid Phone No" textFill="RED" GridPane.rowIndex="7" />
+                  <JFXTextField fx:id="Rent" labelFloat="true" promptText="Rent" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <Label text="Secuirty Guard :" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets top="-24.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <JFXRadioButton fx:id="yes" text="Available" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="131.0" top="-23.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tg" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="no" text="Not Available" toggleGroup="$tg" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="131.0" top="22.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXRadioButton>
+                  <JFXTextField fx:id="PhoneNo" labelFloat="true" promptText="Phone No" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton fx:id="Edit" prefHeight="28.0" prefWidth="267.0" styleClass="jfx-button-black" text="Edit" GridPane.rowIndex="8" />
+                  <JFXButton fx:id="Delete" layoutX="10.0" layoutY="351.0" prefHeight="28.0" prefWidth="267.0" styleClass="jfx-button-black" text="Delete" GridPane.rowIndex="8">
+                     <GridPane.margin>
+                        <Insets top="69.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

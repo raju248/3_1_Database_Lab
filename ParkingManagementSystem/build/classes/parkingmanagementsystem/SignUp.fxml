@@ -7,108 +7,106 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="876.0" style="-fx-background-color: #00001a;" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.SignUpController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="700.0" style="-fx-background-color: #00001a;" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.SignUpController">
    <children>
-      <StackPane fx:id="stackPane" layoutX="14.0" layoutY="17.0" prefHeight="707.0" prefWidth="849.0" />
-      <VBox fx:id="contentVbox" layoutX="297.0" layoutY="17.0" prefHeight="707.0" prefWidth="564.0" style="-fx-background-color: white;" stylesheets="@../GeniunCoder.css">
+      <StackPane fx:id="stackPane" layoutX="282.0" layoutY="21.0" prefHeight="607.0" prefWidth="406.0">
          <children>
-            <JFXTextField fx:id="Name" labelFloat="true" promptText="Name" unFocusColor="BLACK">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="40.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </JFXTextField>
-            <JFXTextField fx:id="MobileNo" labelFloat="true" promptText="Phone No." unFocusColor="BLACK">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" />
-               </VBox.margin>
-            </JFXTextField>
-            <Label fx:id="MobileNoExistsLabel" prefHeight="17.0" prefWidth="432.0" text="This phone no. already has an account" textFill="#ff5a5a">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" />
-               </VBox.margin>
-            </Label>
-            <JFXPasswordField fx:id="Password" labelFloat="true" promptText="Password">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </JFXPasswordField>
-            <Label fx:id="PasswordNotLongText" prefHeight="17.0" prefWidth="430.0" text="Password should be at least 6 characters long" textFill="#ff5a5a">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="46.0" prefWidth="464.0">
+            <VBox fx:id="contentVbox" prefHeight="636.0" prefWidth="424.0" style="-fx-background-color: white;" stylesheets="@../GeniunCoder.css">
                <children>
-                  <Label prefHeight="33.0" prefWidth="115.0" text="Account Type:">
+                  <JFXTextField fx:id="Name" labelFloat="true" promptText="Name" unFocusColor="BLACK">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="MobileNo" labelFloat="true" promptText="Phone No." unFocusColor="BLACK">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label fx:id="MobileNoExistsLabel" prefHeight="17.0" prefWidth="432.0" text="This phone no. already has an account" textFill="#ff5a5a">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXPasswordField fx:id="Password" labelFloat="true" promptText="Password">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXPasswordField>
+                  <Label fx:id="PasswordNotLongText" prefHeight="17.0" prefWidth="430.0" text="Password should be at least 6 characters long" textFill="#ff5a5a">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox>
+                     <children>
+                        <Label prefHeight="33.0" prefWidth="115.0" text="Account Type:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXComboBox fx:id="AccountTypeCombo" prefHeight="28.0" prefWidth="298.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <JFXTextField fx:id="LicenseAndAddress" labelFloat="true" layoutX="80.0" layoutY="250.0" promptText="LicenseOrAddress" unFocusColor="BLACK">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label fx:id="VehicleExistsLabel" layoutX="80.0" layoutY="290.0" prefHeight="17.0" prefWidth="432.0" text="This vehicle is already registered under another user" textFill="#ff5a5a">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="RentOrVehicleModel" labelFloat="true" prefHeight="26.0" prefWidth="497.0" promptText="Rent (per hour)">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label fx:id="InvalidRentLabel" layoutX="80.0" layoutY="489.0" prefHeight="17.0" prefWidth="432.0" text="Invalid Amount" textFill="#ff5a5a">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="SignUpButton" onAction="#SignUpUser" prefHeight="39.0" prefWidth="424.0" styleClass="jfx-button-black" text="Sign Up" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
+                     </VBox.margin>
                      <font>
                         <Font size="17.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </Label>
-                  <JFXComboBox fx:id="AccountTypeCombo" prefHeight="28.0" prefWidth="298.0" />
+                  </JFXButton>
                </children>
                <padding>
-                  <Insets left="20.0" right="20.0" />
+                  <Insets left="40.0" right="40.0" top="40.0" />
                </padding>
-            </HBox>
-            <JFXTextField fx:id="LicenseAndAddress" labelFloat="true" layoutX="80.0" layoutY="250.0" promptText="LicenseOrAddress" unFocusColor="BLACK">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" />
-               </VBox.margin>
-            </JFXTextField>
-            <Label fx:id="VehicleExistsLabel" layoutX="80.0" layoutY="290.0" prefHeight="17.0" prefWidth="432.0" text="This vehicle is already registered under another user" textFill="#ff5a5a">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" />
-               </VBox.margin>
-            </Label>
-            <JFXTextField fx:id="RentOrVehicleModel" labelFloat="true" prefHeight="26.0" prefWidth="497.0" promptText="Rent (per hour)">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-               </VBox.margin>
-            </JFXTextField>
-            <Label fx:id="InvalidRentLabel" layoutX="80.0" layoutY="489.0" prefHeight="17.0" prefWidth="432.0" text="Invalid Amount" textFill="#ff5a5a">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" />
-               </VBox.margin>
-            </Label>
-            <JFXButton fx:id="SignUpButton" onAction="#SignUpUser" prefHeight="39.0" prefWidth="424.0" styleClass="jfx-button-black" text="Sign Up" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </JFXButton>
-         </children>
-         <padding>
-            <Insets left="50.0" right="50.0" top="110.0" />
-         </padding>
-      </VBox>
+            </VBox>
+         </children></StackPane>
       <Label layoutX="53.0" layoutY="98.0" prefHeight="91.0" prefWidth="187.0" text="Sign Up" textFill="WHITE">
          <font>
             <Font name="System Bold" size="50.0" />
          </font>
       </Label>
-      <JFXButton fx:id="BackButton" layoutX="22.0" layoutY="683.0" onAction="#BackButtonAction" prefHeight="39.0" prefWidth="253.0" ripplerFill="#433d3d" styleClass="jfx-button-white" text="Back">
+      <JFXButton fx:id="BackButton" layoutX="20.0" layoutY="236.0" onAction="#BackButtonAction" prefHeight="39.0" prefWidth="253.0" ripplerFill="#433d3d" styleClass="jfx-button-white" text="Back">
          <font>
             <Font size="17.0" />
          </font>

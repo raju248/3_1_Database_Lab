@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="570.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.SpotFoundController">
+   <children>
+      <Label layoutX="165.0" layoutY="108.0" text="New Parking Request">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="303.0" prefHeight="25.0" prefWidth="120.0" text="Owner Name:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="219.0" prefHeight="25.0" prefWidth="167.0" text="Vehicle License No. :">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="Owner" layoutX="202.0" layoutY="303.0" prefHeight="25.0" prefWidth="274.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="vehicleModel" layoutX="210.0" layoutY="266.0" prefHeight="25.0" prefWidth="274.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="cancelButton" layoutX="280.0" layoutY="394.0" prefHeight="35.0" prefWidth="161.0" styleClass="jfx-button-black" stylesheets="@../GeniunCoder.css" text="Cancel">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="LicenseNo" layoutX="242.0" layoutY="218.0" prefHeight="25.0" prefWidth="243.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="265.0" prefHeight="25.0" prefWidth="120.0" text="Vehicle Model:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="acceptButton" layoutX="107.0" layoutY="394.0" prefHeight="35.0" prefWidth="161.0" styleClass="jfx-button-black" stylesheets="@../GeniunCoder.css" text="Accept">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

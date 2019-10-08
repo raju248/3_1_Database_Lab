@@ -15,10 +15,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -37,18 +40,20 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
     private JFXButton Exit;
     @FXML
     private Pane pane;
-    
+
 //    @FXML
 //    private AnchorPane HomePage;
 //    
 //    @FXML 
 //    private AnchorPane Profile;
-    
     AnchorPane HomePage, Profile;
     @FXML
     private Separator seperator;
-    
-    
+    @FXML
+    private JFXButton History;
+    @FXML
+    private JFXButton addSpot;
+
     /**
      * Initializes the controller class.
      */
@@ -56,7 +61,7 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            
+
             // loadHome();
             //HomePage.setVisible(true);
             //Profile.setVisible(false);
@@ -64,15 +69,12 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
             //Profile = FXMLLoader.load(getClass().getResource("ParkingSpotOwnerMainMenu.fxml"));
             pane.getChildren().add(0, HomePage);
         } catch (IOException ex) {
-            Logger.getLogger(ParkingSpotOwnerMainMenuController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-       
-       
-    }    
 
-    
-    void loadHome()
-    {
+    }
+
+    void loadHome() {
         /*AnchorPane root = null;
 
         System.out.println("Profile");
@@ -95,22 +97,38 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
         bordePane.setRight(null);
         bordePane.setTop(null);
     }
-    
+
     @FXML
     void home(ActionEvent event) {
-            loadHome();
-            
+        loadHome();
+
     }
 
     @FXML
     void MyProfileButtonAction(ActionEvent event) {
-        
+
+        String Path = "MyProfileSpotOwner.fxml";
+        loadFXML(Path);
+
+    }
+
+    @FXML
+    void SpotOwnerhistory(ActionEvent event) {
+        String Path = "parkingSpotOwnerHistory.fxml";
+        loadFXML(Path);
+    }
+
+    @FXML
+    void AddSpot(ActionEvent event) {
+        String Path = "AddPermanentSpot.fxml";
+        loadFXML(Path);
+    }
+
+    void loadFXML(String path) {
         AnchorPane root = null;
 
-        System.out.println("Profile");
-
         try {
-            root = FXMLLoader.load(getClass().getResource("MyProfileSpotOwner.fxml"));
+            root = FXMLLoader.load(getClass().getResource(path));
         } catch (IOException e) {
             // e.printStackTrace();
             System.out.println(e.toString());
@@ -119,12 +137,30 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
         root.prefHeightProperty().bind(pane.heightProperty());
         root.prefWidthProperty().bind(pane.widthProperty());
 
-        pane.getChildren().clear();
-        pane.getChildren().addAll(seperator,root);
+        pane.getChildren().add(root);
         bordePane.setRight(null);
         bordePane.setTop(null);
-       // pane.getChildren().add(0, Profile);
-        
     }
-    
+
+    @FXML
+    void viewSpot(ActionEvent event) {
+        try {
+            //Load second scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("YourParkingPermanentSpot.fxml"));
+            Parent root = loader.load();
+
+            //Get controller of scene2
+            YourParkingPermanentSpotController scene2Controller = loader.getController();
+            //Pass whatever data you want. You can have multiple method calls here
+            
+
+            //Show scene 2 in new window            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Second Window");
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

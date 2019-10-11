@@ -12,6 +12,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -44,9 +46,15 @@ public class EditProfileVehicleOwnerController implements Initializable {
 
     DatabaseHelper db = new DatabaseHelper();
     Users user = LoginPageController.loggedUser;
-    
+
     int VehicleOwnerID;
     int VehicleID;
+    @FXML
+    private Label phoneNoLabel;
+
+    boolean isMobileNoValid = true, mobileNoExists = false;
+    
+    String prevMobileNo = user.getPhoneNo();
 
     /**
      * Initializes the controller class.
@@ -54,35 +62,84 @@ public class EditProfileVehicleOwnerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        phoneNoLabel.setVisible(false);
         getDataFromTable();
+
+        PhoneNo.textProperty().addListener((observable, oldValue, newValue) -> {
+            isMobileNoValid = InputValidator.checkContact(newValue);
+            System.out.println(newValue);
+
+            if (isMobileNoValid) {
+                phoneNoLabel.setVisible(false);
+                phoneNoLabel.setText("");
+
+            } else {
+                phoneNoLabel.setText("This phone no. is invalid.");
+                phoneNoLabel.setVisible(true);
+            }
+
+            System.out.println(isMobileNoValid);
+        });
     }
 
-    
     @FXML
     private void SaveButtonAction(ActionEvent event) {
-        
-        if(Name.getText().isEmpty())
-        {
+
+        if (Name.getText().isEmpty()) {
             Name.requestFocus();
             return;
         }
-        
-        if(VehicleLicense.getText().isEmpty())
-        {
+
+        if (VehicleLicense.getText().isEmpty()) {
             VehicleLicense.requestFocus();
             return;
         }
-        
-        if(VehicleModel.getText().isEmpty())
-        {
+
+        if (VehicleModel.getText().isEmpty()) {
             VehicleModel.requestFocus();
             return;
         }
         
-        if(!Name.getText().isEmpty() && !VehicleLicense.getText().isEmpty() && !VehicleModel.getText().isEmpty())
-                updateChanges();
+        if (PhoneNo.getText().trim().length() == 11 && !prevMobileNo.equals(PhoneNo.getText().trim())) {
+            String sql = "SELECT * FROM Users WHERE PhoneNo = '" + PhoneNo.getText().trim() + "'";
+            Statement statement;
+            try {
+                db.connectDB();
+                statement = db.connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+
+                if (resultSet.next()) {
+                    phoneNoLabel.setVisible(true);
+                    phoneNoLabel.setText("This phone no. already has an account");
+                    PhoneNo.requestFocus();
+                    mobileNoExists = true;
+                    return;
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    if (db.connection != null) {
+                        db.connection.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+                if(prevMobileNo.equals(PhoneNo.getText().trim()))
+        {
+            isMobileNoValid = true;
+            mobileNoExists = false;
+        }
+        
+
+        if (!Name.getText().isEmpty() && !mobileNoExists && isMobileNoValid && !VehicleLicense.getText().isEmpty() && !VehicleModel.getText().isEmpty()) {
+            updateChanges();
+        }
     }
-    
+
     void getDataFromTable() {
         String sql = "select * from Users\n"
                 + "inner join VehicleOwner \n"
@@ -110,7 +167,7 @@ public class EditProfileVehicleOwnerController implements Initializable {
                 //Users(String name, String phoneNo, String password, int type)
                 VehicleOwnerID = resultSet.getInt("VehicleOwnerId");
                 VehicleID = resultSet.getInt("VehicleId");
-                
+
             }
         } catch (Exception e) {
 
@@ -124,7 +181,7 @@ public class EditProfileVehicleOwnerController implements Initializable {
             }
         }
     }
-    
+
     void updateChanges() {
         //        UPDATE table_name
         //        SET column1 = value1, column2 = value2, ...
@@ -133,15 +190,15 @@ public class EditProfileVehicleOwnerController implements Initializable {
         String name = Name.getText().trim();
         boolean update1 = false, update2 = false;
 
-       
-        String sql = "update users set Name = ? where PhoneNo = ?";
+        String sql = "update users set Name = ?, PhoneNo = ? where UserId = ?";
 
         try {
             db.connectDB();
 
             PreparedStatement ps = db.connection.prepareStatement(sql);
             ps.setString(1, name);
-            ps.setString(2, user.getPhoneNo());
+            ps.setString(2, PhoneNo.getText().trim());
+            ps.setInt(3, user.getUserId());
 
             int row = ps.executeUpdate();
 
@@ -149,6 +206,7 @@ public class EditProfileVehicleOwnerController implements Initializable {
 
                 update1 = true;
                 user.setName(name);
+                user.setPhoneNo(PhoneNo.getText().trim());
 
                 System.out.println("Updated Users");
             }
@@ -169,15 +227,15 @@ public class EditProfileVehicleOwnerController implements Initializable {
 
         try {
             db.connectDB();
-         
+
             sql = "update Vehicle set VehicleLicenseNo = ? , VehicleModel = ? where VehicleOwnerId = ?";
 
             PreparedStatement ps1 = db.connection.prepareStatement(sql);
 
             ps1.setString(1, VehicleLicense.getText().toString());
-            ps1.setString(2,VehicleModel.getText().toString());
+            ps1.setString(2, VehicleModel.getText().toString());
             ps1.setInt(3, VehicleOwnerID);
-            
+
             int row = ps1.executeUpdate();
 
             if (row > 0) {
@@ -231,7 +289,5 @@ public class EditProfileVehicleOwnerController implements Initializable {
 
         }
     }
-
-
 
 }

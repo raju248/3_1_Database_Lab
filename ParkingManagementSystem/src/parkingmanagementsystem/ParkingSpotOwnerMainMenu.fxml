@@ -12,7 +12,7 @@
 
 <BorderPane fx:id="bordePane" prefHeight="539.0" prefWidth="777.0" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.ParkingSpotOwnerMainMenuController">
    <left>
-      <VBox prefHeight="838.0" prefWidth="249.0" style="-fx-background-color: #00001a;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="539.0" prefWidth="268.0" style="-fx-background-color: #00001a;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="82.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -22,38 +22,38 @@
                   <Insets bottom="50.0" left="50.0" />
                </VBox.margin>
             </ImageView>
-            <JFXButton fx:id="Home" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#home" prefHeight="43.0" prefWidth="249.0" styleClass="jfx-button-noBackGround" text="Home">
+            <JFXButton fx:id="Home" buttonType="RAISED" contentDisplay="TEXT_ONLY" layoutX="10.0" layoutY="260.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#home" prefHeight="19.0" prefWidth="271.0" styleClass="jfx-button-noBackGround" text="Home">
                <font>
-                  <Font size="15.0" />
+                  <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="MyProfile" alignment="TOP_LEFT" buttonType="RAISED" onAction="#MyProfileButtonAction" prefHeight="41.0" prefWidth="249.0" styleClass="jfx-button-noBackGround" text="My Profile ">
+            <JFXButton fx:id="MyProfile" alignment="CENTER" buttonType="RAISED" onAction="#MyProfileButtonAction" prefHeight="7.0" prefWidth="271.0" styleClass="jfx-button-noBackGround" text="My Profile ">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
                <font>
-                  <Font size="15.0" />
+                  <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="History" alignment="TOP_LEFT" buttonType="RAISED" onAction="#SpotOwnerhistory" prefHeight="37.0" prefWidth="249.0" styleClass="jfx-button-noBackGround" text="History">
+            <JFXButton fx:id="History" alignment="CENTER" buttonType="RAISED" onAction="#SpotOwnerhistory" prefHeight="8.0" prefWidth="271.0" styleClass="jfx-button-noBackGround" text="History">
                <font>
-                  <Font size="15.0" />
+                  <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="addSpot" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="324.0" onAction="#AddSpot" prefHeight="38.0" prefWidth="249.0" styleClass="jfx-button-noBackGround" text="Add A Permanent Parking Spot">
+            <JFXButton fx:id="addSpot" alignment="CENTER" buttonType="RAISED" layoutX="10.0" layoutY="324.0" onAction="#AddSpot" prefHeight="6.0" prefWidth="271.0" styleClass="jfx-button-noBackGround" text="Add a Permanent Parking Spot For Rent">
                <font>
-                  <Font size="15.0" />
+                  <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="355.0" onAction="#viewSpot" prefHeight="38.0" prefWidth="249.0" styleClass="jfx-button-noBackGround" text="View Your Permanent Parking Spot">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="10.0" layoutY="355.0" onAction="#viewOtherSpot" prefHeight="51.0" prefWidth="268.0" styleClass="jfx-button-noBackGround" text="View Permanent Parking Spot &#10;Provided by Other Users" textAlignment="CENTER">
                <font>
-                  <Font size="15.0" />
+                  <Font size="14.0" />
                </font>
             </JFXButton>
             <Separator prefHeight="19.0" prefWidth="220.0" />
-            <JFXButton fx:id="Exit" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="403.0" prefHeight="39.0" prefWidth="249.0" styleClass="jfx-button-noBackGround" text="Exit">
+            <JFXButton fx:id="Exit" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="403.0" prefHeight="2.0" prefWidth="271.0" styleClass="jfx-button-noBackGround" text="Exit">
                <font>
-                  <Font size="15.0" />
+                  <Font size="14.0" />
                </font>
             </JFXButton>
          </children>
@@ -66,7 +66,7 @@
       </VBox>
    </left>
    <center>
-      <Pane fx:id="pane" prefHeight="644.0" prefWidth="528.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <Pane fx:id="pane" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Separator fx:id="seperator" layoutX="-4.0" orientation="VERTICAL" prefHeight="539.0" prefWidth="12.0" />
             

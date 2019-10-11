@@ -180,7 +180,14 @@ public class VehicleOwnerHomeController implements Initializable {
     int cancelStatus = 1;
     int startedStatus = 0;
     
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("permanentSpots.fxml"));
+    Parent root ;
 
+    PermanentSpotsController scene2Controller ;
+    
+    Stage stage = new Stage();
+    
+    
     /**
      * *
      * Initializes the controller class.
@@ -188,209 +195,216 @@ public class VehicleOwnerHomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        Pane.getChildren().clear();
-
-        permanentButton.setToggleGroup(tg);
-        instantButton.setToggleGroup(tg);
-
-        vbox.setVisible(false);
-        guardCheck.setVisible(false);
-
-        DoneButton.setOnAction(e
-                -> {
-            giveRating();
-            this.initialize(url, rb);
-        });
-
-        star.ratingProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                starValue = newValue.intValue();
-            }
-
-        });
-        
-        
-        tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {            
-            public void changed(ObservableValue<? extends Toggle> ob,
-                    Toggle o, Toggle n) {                
+        try {
+            Pane.getChildren().clear();
+            
+            root = loader.load();
+            scene2Controller = loader.getController();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Second Window");
+ 
+                        
+            
+            permanentButton.setToggleGroup(tg);
+            instantButton.setToggleGroup(tg);
+            
+            vbox.setVisible(false);
+            guardCheck.setVisible(false);
+            
+            DoneButton.setOnAction(e
+                    -> {
+                if(starValue>0)
+                    giveRating();
                 
-                RadioButton rb = (RadioButton) tg.getSelectedToggle();                
-                
-                if (rb != null) {                    
-                    String s = rb.getText();                    
+                this.initialize(url, rb);
+            });
+            
+            star.ratingProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    starValue = newValue.intValue();
+                }
+            });
+            
+            
+            tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+                public void changed(ObservableValue<? extends Toggle> ob,
+                        Toggle o, Toggle n) {
                     
-                    if(rb.getText().equals("Permanent"))
-                    {
-                        guardCheck.setVisible(true);
-                    }
-                    else
-                    {
-                        guardCheck.setVisible(false);
-                    }
-                }                
-            }            
-        });
-
-        searchButton.setOnAction((e)
-                -> {
-            
-            if(address.getText().toString().isEmpty())
-            {
-                address.requestFocus();
-            }
-
-           
-            RadioButton selectedRadioButton;
-           
-            String toogleGroupValue ;
-            
-            
-            if(tg.getSelectedToggle()!=null)
-            {
-                selectedRadioButton = (RadioButton) tg.getSelectedToggle();
-                toogleGroupValue = selectedRadioButton.getText();
-            }
-            
-            else
-            {
-               return;
-            }
-            
-            
-
-            if (!address.getText().toString().isEmpty() && toogleGroupValue.equals("Instant")) {
-                try {
-
-                    vbox.setVisible(true);
-                    address.setEditable(false);
-                    searchButton.setDisable(true);
-                    String location = address.getText().toString().trim();
-
-                    db.connectDB();
-
-                    int userId = LoginPageController.loggedUser.getUserId();
-
-                    String sql = "Select v.VehicleOwnerId from VehicleOwner as v join Users as u on v.userId = u.userId where v.userId = " + userId;
-
-                    PreparedStatement ps;
-
-                    ps = db.connection.prepareStatement(sql);
-                    ResultSet rs = ps.executeQuery();
-
-                    if (rs.next()) {
-                        SenderId = rs.getInt("VehicleOwnerId");
-                        System.out.println(SenderId);
-                    }
-                    if (db.connection != null) {
-                        try {
-                            db.connection.close();
-                        } catch (SQLException ex) {
-                            Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    RadioButton rb = (RadioButton) tg.getSelectedToggle();
+                    
+                    if (rb != null) {
+                        String s = rb.getText();
+                        
+                        if(s.equals("Permanent"))
+                        {
+                            guardCheck.setVisible(true);
+                        }
+                        else
+                        {
+                            guardCheck.setVisible(false);
                         }
                     }
-
-                    sql = "Insert into ParkingRequests (Location, SenderId, Status) values (?,?,?)";
-
-                    db.connectDB();
-
-                    ps = db.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                    ps.setString(1, location);
-                    ps.setInt(2, SenderId);
-                    ps.setInt(3, 0); //0 for pending request
-
-                    int rowInserted = ps.executeUpdate();
-
-                    requestId = 0;
-
-                    status = 1; //looking for parking
-
-                    if (rowInserted > 0) {
-                        rs = ps.getGeneratedKeys();
-                        rs.next();
-                        requestId = rs.getInt(1);
-
-                        System.out.println(requestId);
-
-                        checkIfAccepted();
-                    }
-                    if (db.connection != null) {
-                        try {
-                            db.connection.close();
-                        } catch (SQLException ex) {
-                            Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-            }
-
-            if (!address.getText().toString().isEmpty() && toogleGroupValue.equals("Permanent")) {
+            });
+            
+            searchButton.setOnAction((e)
+                    -> {
                 
-                if(guardCheck.isSelected())
+                if(address.getText().toString().isEmpty())
                 {
-                    System.out.println("Guard needed");
+                    address.requestFocus();
                 }
                 
-                try {
-                    //Load second scene
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("permanentSpots.fxml"));
-                    Parent root = loader.load();
-
-                    //Get controller of scene2
-                    PermanentSpotsController scene2Controller = loader.getController();
-                    //Pass whatever data you want. You can have multiple method calls here
-                    scene2Controller.transferMessage(address.getText());
-
-                    //Show scene 2 in new window            
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.setTitle("Second Window");
-                    stage.show();
-                } catch (IOException ex) {
-                    System.err.println(ex);
+                
+                RadioButton selectedRadioButton;
+                
+                String toogleGroupValue ;
+                
+                
+                if(tg.getSelectedToggle()!=null)
+                {
+                    selectedRadioButton = (RadioButton) tg.getSelectedToggle();
+                    toogleGroupValue = selectedRadioButton.getText();
                 }
-            }
-
-        }
-        );
-
-        cancel.setOnAction(e
-                -> {
-            if (vbox.isVisible()) {
-                vbox.setVisible(false);
-                address.setEditable(true);
-                searchButton.setDisable(false);
-
-                DatabaseHelper db2 = new DatabaseHelper();
-
-                String sql = "Update ParkingRequests set Status = 3 where RequestId = " + requestId;
-
-                try {
-                    db2.connectDB();
-                    PreparedStatement ps1 = db2.connection.prepareStatement(sql);
-                    int row = ps1.executeUpdate();
-
-                    if (row > 0) {
-                        System.out.println("Request Cancelled");
-                        status = 0;
+                
+                else
+                {
+                    return;
+                }
+                
+                
+                
+                if (!address.getText().toString().isEmpty() && toogleGroupValue.equals("Instant")) {
+                    try {
+                        
+                        vbox.setVisible(true);
+                        address.setEditable(false);
+                        searchButton.setDisable(true);
+                        String location = address.getText().toString().trim();
+                        
+                        db.connectDB();
+                        
+                        int userId = LoginPageController.loggedUser.getUserId();
+                        
+                        String sql = "Select v.VehicleOwnerId from VehicleOwner as v join Users as u on v.userId = u.userId where v.userId = " + userId;
+                        
+                        PreparedStatement ps;
+                        
+                        ps = db.connection.prepareStatement(sql);
+                        ResultSet rs = ps.executeQuery();
+                        
+                        if (rs.next()) {
+                            SenderId = rs.getInt("VehicleOwnerId");
+                            System.out.println(SenderId);
+                        }
+                        if (db.connection != null) {
+                            try {
+                                db.connection.close();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        
+                        sql = "Insert into ParkingRequests (Location, SenderId, Status) values (?,?,?)";
+                        
+                        db.connectDB();
+                        
+                        ps = db.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                        ps.setString(1, location);
+                        ps.setInt(2, SenderId);
+                        ps.setInt(3, 0); //0 for pending request
+                        
+                        int rowInserted = ps.executeUpdate();
+                        
+                        requestId = 0;
+                        
+                        status = 1; //looking for parking
+                        
+                        if (rowInserted > 0) {
+                            rs = ps.getGeneratedKeys();
+                            rs.next();
+                            requestId = rs.getInt(1);
+                            
+                            System.out.println(requestId);
+                            
+                            checkIfAccepted();
+                        }
+                        if (db.connection != null) {
+                            try {
+                                db.connection.close();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
+                
+                if (!address.getText().toString().isEmpty() && toogleGroupValue.equals("Permanent")) {
+                    
+                    int guard = 0;
+                    
+                    if(guardCheck.isSelected())
+                        guard = 1;
+                    
+                    
+                        scene2Controller.transferMessage(address.getText());
+                        scene2Controller.setAddress(address.getText());
+                        scene2Controller.setGuard(guard);
+                        scene2Controller.loadData();
+
+                        //Stage stage = new Stage();
+                        //stage.setScene(new Scene(root));
+                        //stage.setTitle("Second Window");
+                        stage.show();
+//                    } catch (IOException ex) {
+//                        System.err.println(ex);
+//                    }
+                }
+                
             }
-        });
-
-        Pane.getChildren().add(aPane);
-
-        cancelButton.setOnAction(e
-                -> {
-            cancelFoundRequest();
-        });
+            );
+            
+            cancel.setOnAction(e
+                    -> {
+                if (vbox.isVisible()) {
+                    vbox.setVisible(false);
+                    address.setEditable(true);
+                    searchButton.setDisable(false);
+                    
+                    DatabaseHelper db2 = new DatabaseHelper();
+                    
+                    String sql = "Update ParkingRequests set Status = 3 where RequestId = " + requestId;
+                    
+                    try {
+                        db2.connectDB();
+                        PreparedStatement ps1 = db2.connection.prepareStatement(sql);
+                        int row = ps1.executeUpdate();
+                        
+                        if (row > 0) {
+                            System.out.println("Request Cancelled");
+                            status = 0;
+                        }
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            
+            Pane.getChildren().add(aPane);
+            
+            cancelButton.setOnAction(e
+                    -> {
+                cancelFoundRequest();
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     void cancelFoundRequest() {

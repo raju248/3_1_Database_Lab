@@ -14,17 +14,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="777.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.YourParkingPermanentSpotController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="748.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.YourParkingPermanentSpotController">
    <children>
-      <JFXListView fx:id="ListView" fixedCellSize="0.0" layoutX="374.0" layoutY="86.0" prefHeight="500.0" prefWidth="375.0" stylesheets="@../GeniunCoder.css" />
-      <Label fx:id="Label" alignment="CENTER" layoutX="197.0" layoutY="21.0" prefHeight="39.0" prefWidth="448.0" text="Your Permanent Parking Spots" textAlignment="CENTER" textFill="WHITE">
+      <JFXListView fx:id="ListView" fixedCellSize="0.0" layoutX="374.0" layoutY="86.0" prefHeight="500.0" prefWidth="336.0" stylesheets="@../GeniunCoder.css" />
+      <Label fx:id="Label" alignment="CENTER" layoutX="139.0" layoutY="21.0" prefHeight="39.0" prefWidth="448.0" text="Your Permanent Parking Spots" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="28.0" layoutY="86.0" prefHeight="500.0" prefWidth="338.0" style="-fx-background-color: white;">
+      <AnchorPane layoutX="38.0" layoutY="86.0" prefHeight="500.0" prefWidth="306.0" style="-fx-background-color: white;">
          <children>
-            <GridPane layoutX="36.0" layoutY="67.0" prefHeight="383.0" prefWidth="267.0">
+            <GridPane layoutX="20.0" layoutY="59.0" prefHeight="383.0" prefWidth="267.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>

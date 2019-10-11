@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="484.0" styleClass="anchor-pane" stylesheets="@../GeniunCoder.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.OtherPermanentParkingSpotController">
+   <children>
+      <JFXListView fx:id="ListView" fixedCellSize="0.0" layoutX="27.0" layoutY="13.0" prefHeight="513.0" prefWidth="431.0" stylesheets="@../GeniunCoder.css" />
+      <Label layoutX="33.0" layoutY="43.0" prefHeight="21.0" prefWidth="77.0" text="Address :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="address" layoutX="110.0" layoutY="37.0" prefHeight="25.0" prefWidth="221.0" unFocusColor="BLACK">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXListView fx:id="ListView" layoutX="48.0" layoutY="141.0" prefHeight="367.0" prefWidth="390.0" />
+      <JFXButton fx:id="search" layoutX="341.0" layoutY="39.0" prefHeight="31.0" prefWidth="88.0" styleClass="jfx-button-black" text="Search">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXCheckBox fx:id="guardCheck" layoutX="110.0" layoutY="95.0" text="Security Guard">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXCheckBox>
+   </children>
+</AnchorPane>

@@ -20,9 +20,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -51,7 +54,7 @@ public class MyProfileSpotOwnerController implements Initializable {
     private Label RentPerHour;
     
     @FXML
-    private Label Status;
+    private Label ViewSpots;
 
 
     Users user = LoginPageController.loggedUser;
@@ -60,6 +63,8 @@ public class MyProfileSpotOwnerController implements Initializable {
     int spotOwnerId = 0;
 
     DatabaseHelper db = new DatabaseHelper();
+    
+    
 
     /**
      * Initializes the controller class.
@@ -74,6 +79,7 @@ public class MyProfileSpotOwnerController implements Initializable {
 
         getDataFromTable();
         totalEarning();
+        totalRating();
 
         changePassword.setOnMouseClicked((e)
                 -> {
@@ -93,6 +99,28 @@ public class MyProfileSpotOwnerController implements Initializable {
             root.prefWidthProperty().bind(parent.widthProperty());
 
             parent.getChildren().add(root);
+        });
+        
+        ViewSpots.setOnMouseClicked(e->
+        {
+                 try {
+            //Load second scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("YourParkingPermanentSpot.fxml"));
+            Parent root = loader.load();
+
+            //Get controller of scene2
+            YourParkingPermanentSpotController scene2Controller = loader.getController();
+            //Pass whatever data you want. You can have multiple method calls here
+            
+
+            //Show scene 2 in new window            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Second Window");
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         });
 
     }
@@ -130,14 +158,7 @@ public class MyProfileSpotOwnerController implements Initializable {
                 //System.out.println(resultSet.getInt("SpotOwnerId"));
                 spotOwnerId = resultSet.getInt("SpotOwnerId");
                 
-                if(resultSet.getInt(12)==1)
-                {
-                    Status.setText("Online");
-                }
-                else
-                {
-                    Status.setText("Offline");
-                }
+                
 
                 //spot = new ParkingSpot(resultSet.getString("SpotOwnerId"),resultSet.getInt("Status"),);
             }
@@ -184,6 +205,16 @@ public class MyProfileSpotOwnerController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(MyProfileSpotOwnerController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            if(db.connection!=null)
+            {
+                try {
+                    db.connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MyProfileSpotOwnerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         
         
     }
@@ -207,5 +238,73 @@ public class MyProfileSpotOwnerController implements Initializable {
         parent.getChildren().add(root);
 
     }
+    
+    
+    void totalRating()
+    {
+        db.connectDB();
+        
+        String sql = "select AVG(Cast(Rating as float)) as RatingAv from ParkingRequests where Rating is not null and ReceiverId = "+ spotOwnerId ;
+        
+        try {
+            PreparedStatement ps = db.connection.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                float rate = rs.getFloat(1);
+                
+                
+                if(rate == 0.0)
+                {
+                    Rating.setText("N/A");
+                }
+                else
+                {
+                    Rating.setText(String.valueOf(rate));
+                }
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MyProfileSpotOwnerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if(db.connection!=null)
+            {
+                try {
+                    db.connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MyProfileSpotOwnerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+    }
+    
+//    @FXML
+//    void viewSpot(ActionEvent event) {
+//        try {
+//            //Load second scene
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("YourParkingPermanentSpot.fxml"));
+//            Parent root = loader.load();
+//
+//            //Get controller of scene2
+//            YourParkingPermanentSpotController scene2Controller = loader.getController();
+//            //Pass whatever data you want. You can have multiple method calls here
+//            
+//
+//            //Show scene 2 in new window            
+//            Stage stage = new Stage();
+//            stage.setScene(new Scene(root));
+//            stage.setTitle("Second Window");
+//            stage.show();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+
+
 
 }

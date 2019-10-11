@@ -254,6 +254,8 @@ public class ParkingSpotOwnerHomeController implements Initializable {
                                     senderId = resultSet.getInt("SenderId");
                                     int receiverIddd = resultSet.getInt("ReceiverId");
                                     String location = resultSet.getString("Location");
+                                    location = location.toLowerCase();
+                                    address = address.toLowerCase();
 
                                     if (address.contains(location)) {
                                         System.out.println("inside");

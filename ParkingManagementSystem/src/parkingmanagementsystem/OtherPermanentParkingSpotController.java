@@ -5,12 +5,14 @@
  */
 package parkingmanagementsystem;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -33,8 +36,49 @@ import javafx.util.Callback;
  *
  * @author Tech Land
  */
-public class PermanentSpotsController {
+public class OtherPermanentParkingSpotController implements Initializable {
 
+    @FXML
+    private JFXListView<PermanentParkingSpot> ListView;
+    @FXML
+    private JFXTextField address;
+    @FXML
+    private JFXCheckBox guardCheck;
+    @FXML
+    private JFXButton search;
+    
+    DatabaseHelper c = new DatabaseHelper();
+    int guard = 0;
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
+        ListView.setPlaceholder(new Label("No Content In List"));
+        
+        
+        
+        search.setOnAction(e->
+        {
+            if(address.getText().isEmpty())
+            {
+                address.requestFocus();
+                return;
+            }
+            
+            if(guardCheck.isSelected())
+                guard = 1;
+            else
+                guard = 0;
+            
+            loadData();
+            
+        });
+        
+    }    
     
     ObservableList<PermanentParkingSpot> list = FXCollections.observableArrayList();
 
@@ -138,58 +182,21 @@ public class PermanentSpotsController {
 
     }
     
-    @FXML
-    private JFXListView<PermanentParkingSpot> ListView;
-    @FXML
-    private Label Label;
-    @FXML
-    private Label Label1;
-
-    String address;
-    int guard = 0;
-
-    DatabaseHelper c = new DatabaseHelper();
-
-    /**
-     * Initializes the controller class.
-     */
-    public void transferMessage(String m) {
-        Label1.setText(m);
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public int getGuard() {
-        return guard;
-    }
-
-    public void setGuard(int guard) {
-        this.guard = guard;
-    }
     
-    
-    
-
-    public void loadData() {
+   public void loadData() {
+       
 
         ListView.getItems().clear();
         list.clear();
         
         c.connectDB();
-        
         try {
 
-            String sql = "select * from Ads where Address like ? and Guard = ?";
+            String sql = "select * from Ads where Address like ? and  Guard = ?";
             
             PreparedStatement ps = c.connection.prepareStatement(sql);
-            ps.setString(1, "%" + getAddress()+ "%");
-            ps.setInt(2, getGuard());
+            ps.setString(1, "%" + address.getText().trim() +"%");
+            ps.setInt(2, guard);
             ResultSet resultSet = ps.executeQuery();
             
             ArrayList<PermanentParkingSpot> dataForTable = new ArrayList();
@@ -227,6 +234,11 @@ public class PermanentSpotsController {
                 list.add(pps);
             }
 
+            if(list.size()==0)
+            {
+                ListView.setPlaceholder(new Label("No Spot Found"));
+            }
+            
             ListView.setItems(list);
 
             ListView.setCellFactory(new Callback<ListView<PermanentParkingSpot>, ListCell<PermanentParkingSpot>>() {
@@ -251,5 +263,4 @@ public class PermanentSpotsController {
         }
 
     }
-
 }

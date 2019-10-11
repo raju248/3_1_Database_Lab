@@ -109,7 +109,6 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
 
         String Path = "MyProfileSpotOwner.fxml";
         loadFXML(Path);
-
     }
 
     @FXML
@@ -124,14 +123,19 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
         loadFXML(Path);
     }
 
+    @FXML
+    void viewOtherSpot(ActionEvent event) {
+       String Path = "OtherPermanentParkingSpot.fxml";
+        loadFXML(Path);
+    }
+    
     void loadFXML(String path) {
         AnchorPane root = null;
 
         try {
             root = FXMLLoader.load(getClass().getResource(path));
         } catch (IOException e) {
-            // e.printStackTrace();
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
 
         root.prefHeightProperty().bind(pane.heightProperty());
@@ -142,25 +146,5 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
         bordePane.setTop(null);
     }
 
-    @FXML
-    void viewSpot(ActionEvent event) {
-        try {
-            //Load second scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("YourParkingPermanentSpot.fxml"));
-            Parent root = loader.load();
-
-            //Get controller of scene2
-            YourParkingPermanentSpotController scene2Controller = loader.getController();
-            //Pass whatever data you want. You can have multiple method calls here
-            
-
-            //Show scene 2 in new window            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Second Window");
-            stage.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+    
 }

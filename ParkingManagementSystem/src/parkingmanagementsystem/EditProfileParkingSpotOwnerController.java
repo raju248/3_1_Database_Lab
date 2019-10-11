@@ -12,6 +12,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -20,6 +21,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
@@ -27,6 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -61,6 +65,13 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
     ParkingSpotOwner spotOwner;
 
     boolean rentValid = true;
+    
+    @FXML
+    private Label phoneNoLabel;
+
+    boolean isMobileNoValid = true, mobileNoExists = false;
+    
+    String prevMobileNo = user.getPhoneNo();
 
     /**
      * Initializes the controller class.
@@ -69,6 +80,24 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+                phoneNoLabel.setVisible(false);
+
+        PhoneNo.textProperty().addListener((observable, oldValue, newValue) -> {
+            isMobileNoValid = InputValidator.checkContact(newValue);
+            System.out.println(newValue);
+
+            if (isMobileNoValid) {
+                phoneNoLabel.setVisible(false);
+                phoneNoLabel.setText("");
+
+            } else {
+                phoneNoLabel.setText("This phone no. is invalid.");
+                phoneNoLabel.setVisible(true);
+            }
+
+            System.out.println(isMobileNoValid);
+        });
+        
         getDataFromTable();
         InvalidRentLabel.setText("");
 
@@ -91,7 +120,42 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
 
     @FXML
     void SaveButtonAction(ActionEvent event) {
-        if (rentValid && !Rent.getText().trim().isEmpty() && !Name.getText().trim().isEmpty() && !Address.getText().trim().isEmpty()) {
+        
+        if (PhoneNo.getText().trim().length() == 11 && !prevMobileNo.equals(PhoneNo.getText().trim())) {
+            String sql = "SELECT * FROM Users WHERE PhoneNo = '" + PhoneNo.getText().trim() + "'";
+            Statement statement;
+            try {
+                db.connectDB();
+                statement = db.connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+
+                if (resultSet.next()) {
+                    phoneNoLabel.setVisible(true);
+                    phoneNoLabel.setText("This phone no. already has an account");
+                    PhoneNo.requestFocus();
+                    mobileNoExists = true;
+                    return;
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    if (db.connection != null) {
+                        db.connection.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        if(prevMobileNo.equals(PhoneNo.getText().trim()))
+        {
+            isMobileNoValid = true;
+            mobileNoExists = false;
+        }
+        
+        if (rentValid && !mobileNoExists && isMobileNoValid &&  !Rent.getText().trim().isEmpty() && !Name.getText().trim().isEmpty() && !Address.getText().trim().isEmpty()) {
             updateChanges();
         }
     }
@@ -102,14 +166,14 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
                 + "Users.UserId = ParkingSpotOwner.UserId \n"
                 + "left join ParkingSpot on \n"
                 + "ParkingSpot.SpotOwnerId = ParkingSpotOwner.SpotOwnerId\n"
-                + "where Users.PhoneNo = ?";
+                + "where Users.UserId = ?";
 
         try {
             db.connectDB();
 
             PreparedStatement ps = db.connection.prepareStatement(sql);
 
-            ps.setString(1, user.getPhoneNo());
+            ps.setInt(1, user.getUserId());
 
             ResultSet resultSet = ps.executeQuery();
 
@@ -125,6 +189,7 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
                 spotAddress = resultSet.getString("Address");
                 spotRent = resultSet.getFloat("Rent");
                 ownerId = resultSet.getInt("SpotOwnerId");
+                
 
             }
         } catch (Exception e) {
@@ -154,14 +219,15 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
             rent = Float.parseFloat(Rent.getText().trim());
         }
 
-        String sql = "update users set Name = ? where PhoneNo = ?";
+        String sql = "update users set Name = ?, PhoneNo = ? where UserId = ?";
 
         try {
             db.connectDB();
 
             PreparedStatement ps = db.connection.prepareStatement(sql);
             ps.setString(1, name);
-            ps.setString(2, user.getPhoneNo());
+            ps.setString(2, PhoneNo.getText().trim());
+            ps.setInt(3, user.getUserId());
 
             int row = ps.executeUpdate();
 
@@ -169,6 +235,7 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
 
                 update1 = true;
                 user.setName(name);
+                user.setPhoneNo(PhoneNo.getText().trim());
 
                 System.out.println("Updated Users");
             }
@@ -255,4 +322,7 @@ public class EditProfileParkingSpotOwnerController implements Initializable {
 
         }
     }
+    
+
+    
 }

@@ -227,6 +227,11 @@ public class PermanentSpotsController {
                 list.add(pps);
             }
 
+            if(list.size()==0)
+            {
+                ListView.setPlaceholder(new Label("No Spot Found"));
+            }
+            
             ListView.setItems(list);
 
             ListView.setCellFactory(new Callback<ListView<PermanentParkingSpot>, ListCell<PermanentParkingSpot>>() {

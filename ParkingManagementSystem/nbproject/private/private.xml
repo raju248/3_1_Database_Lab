@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/PermanentSpotsController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/YourParkingPermanentSpotController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/VehicleOwnerMainMenuController.java</file>
             <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/MyProfileSpotOwnerController.java</file>
             <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/VehicleOwnerHomeController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/ParkingSpotOwnerHistoryController.java</file>
             <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/OtherPermanentParkingSpotController.java</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/ParkingSpotOwnerMainMenuController.java</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/EditProfileParkingSpotOwnerController.java</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/MyProfileSpotOwner.fxml</file>
-            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/AddPermanentSpotController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/ParkingSpotOwnerHomeController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/SignUpController.java</file>
+            <file>file:/C:/Users/Tech%20Land/Documents/NetBeansProjects/ParkingManagementSystem/src/parkingmanagementsystem/VehicalOwnerHistoryController.java</file>
         </group>
     </open-files>
 </project-private>

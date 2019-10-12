@@ -197,7 +197,7 @@ public class VehicleOwnerHomeController implements Initializable {
 
         try {
             Pane.getChildren().clear();
-            
+            root = null;
             root = loader.load();
             scene2Controller = loader.getController();
             stage.setScene(new Scene(root));
@@ -216,7 +216,16 @@ public class VehicleOwnerHomeController implements Initializable {
                 if(starValue>0)
                     giveRating();
                 
-                this.initialize(url, rb);
+                //this.initialize(url, rb);
+                Pane.getChildren().add(aPane);
+                            
+            
+            permanentButton.setToggleGroup(tg);
+            instantButton.setToggleGroup(tg);
+            
+            vbox.setVisible(false);
+            guardCheck.setVisible(false);
+            star.setRating(0.0);
             });
             
             star.ratingProperty().addListener(new ChangeListener<Number>() {
@@ -764,14 +773,6 @@ public class VehicleOwnerHomeController implements Initializable {
                 rent2.setText(String.valueOf(rs.getInt("Rent")) + " Tk.");
                 rentValue = rs.getInt("Rent");
 
-                float rating = rs.getFloat("Rating");
-
-                if (rating == 0.0) {
-                    Rating.setText("N/A");
-
-                } else {
-                    Rating.setText(String.valueOf(rating) + "/5");
-                }
 
             }
         } catch (SQLException ex) {
@@ -806,7 +807,24 @@ public class VehicleOwnerHomeController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        sql = "select AVG(Cast(Rating as float)) as RatingAv from ParkingRequests where Rating is not null and ReceiverId = ?";
+
+        try {
+            db1.connectDB();
+            PreparedStatement ps = db1.connection.prepareStatement(sql);
+            ps.setInt(1, receiverId);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Rating.setText(String.valueOf(rs.getFloat(1)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleOwnerHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
+    
 
 }

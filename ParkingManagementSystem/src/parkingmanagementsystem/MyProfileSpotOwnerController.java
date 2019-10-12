@@ -59,7 +59,7 @@ public class MyProfileSpotOwnerController implements Initializable {
 
     Users user = LoginPageController.loggedUser;
     ParkingSpot spot;
-    ParkingSpotOwner owner = new ParkingSpotOwner();
+    ParkingSpotOwner owner = ParkingSpotOwnerHomeController.ps;
     int spotOwnerId = 0;
 
     DatabaseHelper db = new DatabaseHelper();
@@ -127,11 +127,11 @@ public class MyProfileSpotOwnerController implements Initializable {
 
     void getDataFromTable() {
         String sql = "select * from users \n"
-                + "left join ParkingSpotOwner on\n"
-                + "Users.UserId = ParkingSpotOwner.UserId \n"
-                + "left join ParkingSpot on \n"
+                + "join ParkingSpotOwner on\n"
+                + " Users.UserId = ParkingSpotOwner.UserId \n"
+                + "join ParkingSpot on \n"
                 + "ParkingSpot.SpotOwnerId = ParkingSpotOwner.SpotOwnerId\n"
-                + "where Users.PhoneNo = ?";
+                + " where Users.PhoneNo = ?";
 
         try {
             db.connectDB();
@@ -143,21 +143,14 @@ public class MyProfileSpotOwnerController implements Initializable {
             ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
-                float rating = resultSet.getFloat("Rating");
-
-                if (rating == 0.0) {
-                    Rating.setText("N/A");
-                } else {
-                    Rating.setText(String.valueOf(rating) + "/5");
-                }
+                
 
                 Address.setText(resultSet.getString("Address"));
 
                 RentPerHour.setText(resultSet.getString("Rent") + " Tk.");
                 
                 //System.out.println(resultSet.getInt("SpotOwnerId"));
-                spotOwnerId = resultSet.getInt("SpotOwnerId");
-                
+                //spotOwnerId = resultSet.getInt("SpotOwnerId");
                 
 
                 //spot = new ParkingSpot(resultSet.getString("SpotOwnerId"),resultSet.getInt("Status"),);
@@ -179,7 +172,7 @@ public class MyProfileSpotOwnerController implements Initializable {
     {
         db.connectDB();
         
-        String sql = " select SUM(TotalAmount) as total from ParkingRequests where ReceiverId = "+ spotOwnerId ;
+        String sql = " select SUM(TotalAmount) as total from ParkingRequests where ReceiverId = "+  owner.getSpotOwerId() ;
         
         try {
             PreparedStatement ps = db.connection.prepareStatement(sql);
@@ -244,7 +237,7 @@ public class MyProfileSpotOwnerController implements Initializable {
     {
         db.connectDB();
         
-        String sql = "select AVG(Cast(Rating as float)) as RatingAv from ParkingRequests where Rating is not null and ReceiverId = "+ spotOwnerId ;
+        String sql = "select AVG(Cast(Rating as float)) as RatingAv from ParkingRequests where Rating is not null and ReceiverId = "+ owner.getSpotOwerId() ;
         
         try {
             PreparedStatement ps = db.connection.prepareStatement(sql);

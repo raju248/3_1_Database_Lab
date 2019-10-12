@@ -176,7 +176,7 @@ public class VehicalOwnerHistoryController implements Initializable {
                     + "  ParkingSpotOwner as po on po.SpotOwnerId = pr.ReceiverId join\n"
                     + "  ParkingSpot as ps on ps.SpotOwnerId = po.SpotOwnerId join\n"
                     + "  Users as u2 on u2.UserId = po.UserId\n"
-                    + "  where u.UserId = " + user.getUserId() +" and pr.ReceiverId is not null order by pr.StartTime desc";
+                    + "  where u.UserId = " + user.getUserId() +" and pr.ReceiverId is not null and StartTime is not null and EndTime is not null order by pr.StartTime desc";
 
             PreparedStatement statement = c.connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();

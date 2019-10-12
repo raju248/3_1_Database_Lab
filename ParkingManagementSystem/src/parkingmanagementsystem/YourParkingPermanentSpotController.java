@@ -462,7 +462,8 @@ public class YourParkingPermanentSpotController implements Initializable {
 
     public void loadData() {
 
-        
+        ListView.getItems().clear();
+        list.clear();
 
         c.connectDB();
         try {
@@ -507,6 +508,12 @@ public class YourParkingPermanentSpotController implements Initializable {
                 list.add(pps);
             }
 
+            
+            if(list.size()==0)
+            {
+                ListView.setPlaceholder(new Label("No Spot Found"));
+            }
+            
             ListView.setItems(list);
 
             ListView.setCellFactory(new Callback<ListView<PermanentParkingSpot>, ListCell<PermanentParkingSpot>>() {

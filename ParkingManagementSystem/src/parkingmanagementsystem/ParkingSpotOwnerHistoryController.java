@@ -194,7 +194,7 @@ public class ParkingSpotOwnerHistoryController implements Initializable {
                     + "  VehicleOwner as vo on  pr.SenderId = vo.VehicleOwnerId join\n"
                     + "  Vehicle as v on vo.VehicleOwnerId = v.VehicleOwnerId join\n"
                     + "  Users as u2 on u2.UserId = vo.UserId\n"
-                    + "  where u.UserId = " + user.getUserId() + " order by pr.StartTime desc";
+                    + "  where u.UserId = " + user.getUserId() + " and StartTime is not null and  EndTime is not null order by pr.StartTime desc";
 
             System.out.println(sql);
 

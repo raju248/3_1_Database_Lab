@@ -40,7 +40,7 @@
                </font>
             </JFXButton>
             <Separator prefHeight="19.0" prefWidth="220.0" />
-            <JFXButton fx:id="Exit" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="403.0" prefHeight="31.0" prefWidth="278.0" styleClass="jfx-button-noBackGround" text="Exit">
+            <JFXButton fx:id="Exit" alignment="TOP_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="403.0" prefHeight="31.0" prefWidth="278.0" styleClass="jfx-button-noBackGround" text="Log out">
                <font>
                   <Font size="15.0" />
                </font>

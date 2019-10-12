@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,24 +45,8 @@ public class LoginPageController implements Initializable {
 
     DatabaseHelper db = new DatabaseHelper();
     boolean isMobileNoValid;
-    
+
     static Users loggedUser;
-    
-//    Task<Integer> task = new Task<Integer>() {
-//         @Override protected Integer call() throws Exception {
-//             int iterations;
-//             for (iterations = 0; iterations < 100000; iterations++) {
-//                 
-//                 if (isCancelled()) {
-//                     break;
-//                 }
-//                 System.out.println("Iteration " + iterations);
-//             }
-//             return iterations;
-//         }
-//     };
-//    
-    
 
     /**
      * Initializes the controller class.
@@ -83,10 +69,7 @@ public class LoginPageController implements Initializable {
         Password.textProperty().addListener((observable, oldValue, newValue) -> {
             IncorrectLabel.setVisible(false);
         });
-        
-//        Thread t = new Thread(task);
-//        t.start();
-        
+
     }
 
     @FXML
@@ -117,7 +100,7 @@ public class LoginPageController implements Initializable {
 
                 ps.setString(1, phoneNo);
                 ps.setString(2, password);
-                
+
                 ResultSet resultSet = ps.executeQuery();
 
                 if (resultSet.next()) {
@@ -125,26 +108,27 @@ public class LoginPageController implements Initializable {
 //                        System.out.println(resultSet.getString("Name"));
 //                        System.out.println(resultSet.getString("MobileNo"));
 //                        System.out.println(resultSet.getString("Password"));
-                            int userId = resultSet.getInt("UserId");
-                            String name = resultSet.getString("Name");
-                            String pass = resultSet.getString("Password");
-                            String mobile = resultSet.getString("PhoneNo");
-                            int type = resultSet.getInt("Type");
-                            
+                    int userId = resultSet.getInt("UserId");
+                    String name = resultSet.getString("Name");
+                    String pass = resultSet.getString("Password");
+                    String mobile = resultSet.getString("PhoneNo");
+                    int type = resultSet.getInt("Type");
 
-                            loggedUser = new Users(userId, name, mobile, pass, type);
-                            
+                    loggedUser = new Users(userId, name, mobile, pass, type);
+
+                    changeUserStatusOnLogin();
 
                     try {
                         Stage stage = (Stage) SignIn.getScene().getWindow();
                         String title = "Main Menu";
                         LoadStages load;
-                        
-                        if(type==2)
-                             load = new LoadStages(stage, title, "VehicleOwnerMainMenu.fxml");
-                        else
+
+                        if (type == 2) {
+                            load = new LoadStages(stage, title, "VehicleOwnerMainMenu.fxml");
+                        } else {
                             load = new LoadStages(stage, title, "ParkingSpotOwnerMainMenu.fxml");
-                        
+                        }
+
                     } catch (IOException e) {
                         System.out.println(e);
                     }
@@ -166,6 +150,26 @@ public class LoginPageController implements Initializable {
 
         } else {
             IncorrectLabel.setVisible(true);
+        }
+
+    }
+
+    void changeUserStatusOnLogin() {
+
+        String sql = "update Users set Status = ? where UserId = " + loggedUser.getUserId();
+
+        db.connectDB();
+        PreparedStatement ps;
+        try {
+            ps = db.connection.prepareStatement(sql);
+            ps.setInt(1, 1); //1 for logged in 
+            int row = ps.executeUpdate();
+
+            if (row > 0) {
+                System.out.println("Updated status");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

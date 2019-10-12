@@ -78,6 +78,8 @@ public class OtherPermanentParkingSpotController implements Initializable {
             
         });
         
+        loadDataEverythingOnFirstRun();
+        
     }    
     
     ObservableList<PermanentParkingSpot> list = FXCollections.observableArrayList();
@@ -182,6 +184,83 @@ public class OtherPermanentParkingSpotController implements Initializable {
 
     }
     
+    public void loadDataEverythingOnFirstRun()
+    {
+        ListView.getItems().clear();
+        list.clear();
+        
+        c.connectDB();
+        try {
+
+            String sql = "select * from Ads where SpotOwnerId <> "+ ParkingSpotOwnerHomeController.ps.getSpotOwerId();
+            
+            PreparedStatement ps = c.connection.prepareStatement(sql);
+            
+            ResultSet resultSet = ps.executeQuery();
+            
+            ArrayList<PermanentParkingSpot> dataForTable = new ArrayList();
+
+            while (resultSet.next()) {
+
+                PermanentParkingSpot pps = new PermanentParkingSpot();
+
+                Date date = null;
+                Timestamp timestamp = resultSet.getTimestamp("addedDate");
+                if (timestamp != null) {
+                    date = new java.util.Date(timestamp.getTime());
+                }
+
+                SimpleDateFormat sm = new SimpleDateFormat("EE dd-MMMM-yyyy hh:mm a");
+
+//                String StartTime = String.valueOf(resultSet.getDate("StartTime"));
+                String addedDate = sm.format(date);
+                String Address = resultSet.getString("Address");
+                String contact = resultSet.getString("Contact");
+
+                System.out.println(Address);
+                
+                int guard = resultSet.getInt("Guard");
+                int rent = resultSet.getInt("Rent");
+
+                pps.setAddedDate(addedDate);
+                pps.setAddress(Address);
+
+                pps.setGuard(guard);
+                pps.setPhoneNo(contact);
+                pps.setRent(rent);
+                pps.setID(resultSet.getInt("AddID"));
+
+                list.add(pps);
+            }
+
+            if(list.size()==0)
+            {
+                ListView.setPlaceholder(new Label("No Spot Found"));
+            }
+            
+            ListView.setItems(list);
+
+            ListView.setCellFactory(new Callback<ListView<PermanentParkingSpot>, ListCell<PermanentParkingSpot>>() {
+
+                @Override
+                public ListCell<PermanentParkingSpot> call(ListView<PermanentParkingSpot> param) {
+                    return new XCell();
+                }
+
+            });
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (c.connection != null) {
+                try {
+                    c.connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
     
    public void loadData() {
        
@@ -192,7 +271,7 @@ public class OtherPermanentParkingSpotController implements Initializable {
         c.connectDB();
         try {
 
-            String sql = "select * from Ads where Address like ? and  Guard = ?";
+            String sql = "select * from Ads where Address like ? and  Guard = ? and SpotOwnerId <> "+ ParkingSpotOwnerHomeController.ps.getSpotOwerId();;
             
             PreparedStatement ps = c.connection.prepareStatement(sql);
             ps.setString(1, "%" + address.getText().trim() +"%");

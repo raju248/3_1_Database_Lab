@@ -8,6 +8,9 @@ package parkingmanagementsystem;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,11 +20,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Separator;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import static parkingmanagementsystem.LoginPageController.loggedUser;
 
 /**
  * FXML Controller class
@@ -71,6 +79,29 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        Exit.setOnAction(e
+                -> {
+
+            bordePane.setEffect(new BoxBlur(3, 3, 3));
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Log out");
+            alert.setHeaderText("Press OK if you want to continue");
+
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add("GeniunCoder.css");
+            dialogPane.getStyleClass().add("alert");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            bordePane.setEffect(null);
+
+            if (result.get() == ButtonType.OK) {
+                changeUserStatusOnLogOut();
+            } else {
+                bordePane.requestFocus();
+            }
+
+        });
 
     }
 
@@ -125,10 +156,10 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
 
     @FXML
     void viewOtherSpot(ActionEvent event) {
-       String Path = "OtherPermanentParkingSpot.fxml";
+        String Path = "OtherPermanentParkingSpot.fxml";
         loadFXML(Path);
     }
-    
+
     void loadFXML(String path) {
         AnchorPane root = null;
 
@@ -146,5 +177,35 @@ public class ParkingSpotOwnerMainMenuController implements Initializable {
         bordePane.setTop(null);
     }
 
-    
+    void changeUserStatusOnLogOut() {
+        DatabaseHelper db = new DatabaseHelper();
+
+        String sql = "update Users set Status = ? where UserId = " + loggedUser.getUserId();
+
+        db.connectDB();
+        PreparedStatement ps;
+        try {
+            ps = db.connection.prepareStatement(sql);
+            ps.setInt(1, 0); //0 for logged out 
+            int row = ps.executeUpdate();
+
+            if (row > 0) {
+                System.out.println("Updated status");
+                Stage stage = (Stage) bordePane.getScene().getWindow();
+                String title = "Login";
+                LoadStages load;
+
+                try {
+                    load = new LoadStages(stage, title, "loginPage.fxml");
+                } catch (IOException ex) {
+                    Logger.getLogger(VehicleOwnerMainMenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

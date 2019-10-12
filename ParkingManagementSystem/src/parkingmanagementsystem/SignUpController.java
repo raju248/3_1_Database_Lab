@@ -44,7 +44,7 @@ import javafx.stage.Stage;
  */
 public class SignUpController implements Initializable {
 
- @FXML
+    @FXML
     private AnchorPane anchorPane;
 
     @FXML
@@ -89,13 +89,12 @@ public class SignUpController implements Initializable {
     @FXML
     private JFXButton BackButton;
 
-
     boolean isMobileNoValid;
     boolean rentValid;
 
     DatabaseHelper db = new DatabaseHelper();
-    
-    int userType=0; //1 = parking spot owner 2 = Vehicle owner
+
+    int userType = 0; //1 = parking spot owner 2 = Vehicle owner
 
     /**
      * Initializes the controller class.
@@ -113,63 +112,58 @@ public class SignUpController implements Initializable {
             if (isMobileNoValid) {
                 MobileNoExistsLabel.setVisible(false);
                 MobileNoExistsLabel.setText("");
-                
+
             } else {
                 MobileNoExistsLabel.setText("This phone no. is invalid.");
                 MobileNoExistsLabel.setVisible(true);
             }
-            
+
             System.out.println(isMobileNoValid);
         });
-        
+
         LicenseAndAddress.setPromptText("");
         LicenseAndAddress.setVisible(false);
         ObservableList<String> list = FXCollections.observableArrayList();
         list.addAll("Parking Spot Owner", "Vehicle Owner");
         AccountTypeCombo.getItems().addAll(list);
         AccountTypeCombo.setPromptText("Select Your Account Type");
-        
-        AccountTypeCombo.setOnAction(new EventHandler <ActionEvent> () {
+
+        AccountTypeCombo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 LicenseAndAddress.setDisable(false);
-                if(AccountTypeCombo.getValue().toString().equals("Parking Spot Owner"))
-                {
+                if (AccountTypeCombo.getValue().toString().equals("Parking Spot Owner")) {
                     LicenseAndAddress.setPromptText("Parking Spot Address");
                     userType = 1;
                     System.out.println(userType);
                     RentOrVehicleModel.setVisible(true);
                     RentOrVehicleModel.setPromptText("Rent");
                     LicenseAndAddress.setVisible(true);
-                }
-                    
-                else
-                {
+                } else {
                     RentOrVehicleModel.setVisible(true);
                     RentOrVehicleModel.setPromptText("Vehicle Model");
                     LicenseAndAddress.setPromptText("Vehicle License No");
                     userType = 2;
                     System.out.println(userType);
                     LicenseAndAddress.setVisible(true);
-                }     
+                }
             }
         });
-   
+
         VehicleExistsLabel.setText("");
         InvalidRentLabel.setText("");
         RentOrVehicleModel.setVisible(false);
-        
-       
-            RentOrVehicleModel.textProperty().addListener((observable, oldValue, newValue) -> {
-             
+
+        RentOrVehicleModel.textProperty().addListener((observable, oldValue, newValue) -> {
+
             String PATTERN = "[0-9]?([0-9]*[.])?[0-9]+";    //Writing pattern and array size//
             Pattern patt = Pattern.compile(PATTERN);
             Matcher match = patt.matcher(newValue);
-            
-            if (userType ==1 && !match.matches()) {
+
+            if (userType == 1 && !match.matches()) {
                 rentValid = false;
                 InvalidRentLabel.setText("Invalid Rent");
-                
+
 //                if(newValue.startsWith(""))
 //                    Rent.setText("");
 //                
@@ -181,9 +175,7 @@ public class SignUpController implements Initializable {
                 InvalidRentLabel.setText("");
             }
         });
-        
-         
-         
+
     }
 
     @FXML
@@ -205,20 +197,20 @@ public class SignUpController implements Initializable {
         String password = Password.getText().trim();
         String licenseandAddress = LicenseAndAddress.getText().trim();
         float rent = 0;
-        if(rentValid && userType==1)
-              rent = Float.parseFloat(RentOrVehicleModel.getText().trim());
-        
-        String model= "";
-        
-        if(userType ==2 && !RentOrVehicleModel.getText().trim().isEmpty())
+        if (rentValid && userType == 1) {
+            rent = Float.parseFloat(RentOrVehicleModel.getText().trim());
+        }
+
+        String model = "";
+
+        if (userType == 2 && !RentOrVehicleModel.getText().trim().isEmpty()) {
             model = RentOrVehicleModel.getText().trim();
-            
-        
+        }
+
         boolean mobileNoExists = false;
         boolean VehicleExists = false;
-        
-        if(password.length()<6)
-        {
+
+        if (password.length() < 6) {
             PasswordNotLongText.setVisible(true);
             Password.requestFocus();
             return;
@@ -251,88 +243,73 @@ public class SignUpController implements Initializable {
                 }
             }
         }
-        
-        if(userType==2 && !licenseandAddress.isEmpty())
-        {
+
+        if (userType == 2 && !licenseandAddress.isEmpty()) {
             VehicleExists = db.checkVehicleExist(licenseandAddress);
-            
-            if(VehicleExists)
-            {
+
+            if (VehicleExists) {
                 VehicleExistsLabel.setText("This vehicle is already registered under another user");
-            }
-            else
-            {
+            } else {
                 VehicleExistsLabel.setText("");
             }
         }
 
-        if (!mobileNoExists && isMobileNoValid && !name.isEmpty() && !password.isEmpty() && password.length() >= 6 && !RentOrVehicleModel.getText().trim().isEmpty()) 
-        {
+        if (!mobileNoExists && isMobileNoValid && !name.isEmpty() && !password.isEmpty() && password.length() >= 6 && !RentOrVehicleModel.getText().trim().isEmpty()) {
             try {
-                        anchorPane.setEffect(new BoxBlur(3,3,3));
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Confirm Sign UP");
-                        alert.setHeaderText("Press OK if you want to continue");
-                        
-                        DialogPane dialogPane = alert.getDialogPane();
-                        dialogPane.getStylesheets().add("GeniunCoder.css");
-                        dialogPane.getStyleClass().add("alert");
-                        
-                        Optional<ButtonType> result = alert.showAndWait();
-                        anchorPane.setEffect(null); 
-                        
-                        
-                        Users user = new Users(0,name, mobileNo, password, userType);
-                        
-                        if (result.get() == ButtonType.OK) {
-                            
-                            if(userType==2 && !VehicleExists) 
-                            {
-                                        int GeneratedUserId = db.AddUser(user);
-                            
-                                        VehicleOwner owner = new VehicleOwner(GeneratedUserId, 0);
-                            
-                                        int GeneratedOwnerId = db.AddVehicleOwner(owner);
-                            
-                                        Vehicle vehicle = new Vehicle(GeneratedOwnerId, licenseandAddress, model,0);
-                            
-                                        db.addVehicle(vehicle);
-                                        
-                                        Stage stage = (Stage) SignUpButton.getScene().getWindow();
-                                        String title = "Sign In";
-                                        LoadStages load = new LoadStages(stage, title, "loginPage.fxml");  
-                            }
-                            
-                            else if(VehicleExists)
-                            {
-                                LicenseAndAddress.requestFocus();
-                            }
-                            
-                            
-                            if(userType==1 && !licenseandAddress.isEmpty() && rentValid)
-                            {
-                                int GeneratedUserId = db.AddUser(user);
-                                
-                                ParkingSpotOwner owner = new ParkingSpotOwner(GeneratedUserId, 0);
-                                
-                                int GeneratedOwnerId = db.AddParkingSpotOwner(owner);
-                                
-                                
-                                //(int spotOwnerId, int status, float rent, String address, int rating)
-                                
-                                ParkingSpot spot = new ParkingSpot(GeneratedOwnerId, 0, rent, licenseandAddress, (float) 0.0, (float) 0.0);
-                                
-                                db.addParkingSpot(spot);
-                                
-                                Stage stage = (Stage) SignUpButton.getScene().getWindow();
-                                String title = "Sign In";
-                                LoadStages load = new LoadStages(stage, title, "loginPage.fxml");  
-                            }
-  
-                        } else {
-                            return;
-                        }
+                anchorPane.setEffect(new BoxBlur(3, 3, 3));
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm Sign UP");
+                alert.setHeaderText("Press OK if you want to continue");
 
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add("GeniunCoder.css");
+                dialogPane.getStyleClass().add("alert");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                anchorPane.setEffect(null);
+
+                Users user = new Users(0, name, mobileNo, password, userType);
+
+                if (result.get() == ButtonType.OK) {
+
+                    if (userType == 2 && !VehicleExists) {
+                        int GeneratedUserId = db.AddUser(user);
+
+                        VehicleOwner owner = new VehicleOwner(GeneratedUserId, 0);
+
+                        int GeneratedOwnerId = db.AddVehicleOwner(owner);
+
+                        Vehicle vehicle = new Vehicle(GeneratedOwnerId, licenseandAddress, model, 0);
+
+                        db.addVehicle(vehicle);
+
+                        Stage stage = (Stage) SignUpButton.getScene().getWindow();
+                        String title = "Sign In";
+                        LoadStages load = new LoadStages(stage, title, "loginPage.fxml");
+                    } else if (VehicleExists) {
+                        LicenseAndAddress.requestFocus();
+                    }
+
+                    if (userType == 1 && !licenseandAddress.isEmpty() && rentValid) {
+                        int GeneratedUserId = db.AddUser(user);
+
+                        ParkingSpotOwner owner = new ParkingSpotOwner(GeneratedUserId, 0);
+
+                        int GeneratedOwnerId = db.AddParkingSpotOwner(owner);
+
+                        //(int spotOwnerId, int status, float rent, String address, int rating)
+                        ParkingSpot spot = new ParkingSpot(GeneratedOwnerId, 0, rent, licenseandAddress, (float) 0.0, (float) 0.0);
+
+                        db.addParkingSpot(spot);
+
+                        Stage stage = (Stage) SignUpButton.getScene().getWindow();
+                        String title = "Sign In";
+                        LoadStages load = new LoadStages(stage, title, "loginPage.fxml");
+                    }
+
+                } else {
+                    return;
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

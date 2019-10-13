@@ -176,8 +176,12 @@ public class VehicalOwnerHistoryController implements Initializable {
                     + "  ParkingSpotOwner as po on po.SpotOwnerId = pr.ReceiverId join\n"
                     + "  ParkingSpot as ps on ps.SpotOwnerId = po.SpotOwnerId join\n"
                     + "  Users as u2 on u2.UserId = po.UserId\n"
-                    + "  where u.UserId = " + user.getUserId() +" and pr.ReceiverId is not null and StartTime is not null and EndTime is not null order by pr.StartTime desc";
+                    + "  where u.UserId = " + user.getUserId() +" and pr.ReceiverId is not null "
+                    + "  and StartTime is not null"
+                    + "  and EndTime is not null "
+                    + "  order by pr.StartTime desc";
 
+            
             PreparedStatement statement = c.connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
@@ -276,30 +280,5 @@ public class VehicalOwnerHistoryController implements Initializable {
     }
 
 }
-/**
- * select
- * u.Name,u.PhoneNo,p.Address,p.Rent,p.Rating,pr.DATE,pr.StartTime,pr.EndTime
- * from Vehicle ve inner join ParkingRecords pr on ve.VehicleId=pr.VehicleId
- * inner join ParkingSpot p on p.SpotId=pr.SpotId inner join ParkingSpotOwner pa
- * on pa.SpotOwnerId=p.SpotOwnerId inner join Users u on u.UserId=pa.UserId and
- * ve.VehicleId=2002
- *
- *
- */
 
 
-/*select u2.Name 'SpotOwner', ps.Address 'Address', pr.Amount 'Amount',
-pr.StartTime 'StartTime', pr.EndTime 'EndTime'
-from Users as u
-inner join VehicleOwner as vo
-on u.UserId = vo.UserId
- join Vehicle as v
-on v.VehicleOwnerId = vo.VehicleOwnerId
-inner join ParkingRecords as pr
-on pr.VehicleId = v.VehicleId
-inner join ParkingSpot as ps
-on ps.SpotId = pr.SpotId
-inner join ParkingSpotOwner as pso
-on pso.SpotOwnerId = ps.SpotOwnerId
-inner join Users as u2
-on pso.UserId = u2.UserId*/

@@ -64,9 +64,14 @@ public class PermanentSpotsController {
         Label Guard = new Label("");
         HBox hbox4 = new HBox();
 
-        Label dateLabel = new Label("Added : ");
+        Label dateLabel = new Label("Added on : ");
         Label Date = new Label("");
         HBox hbox5 = new HBox();
+        
+        Label nameLabel = new Label("Added by: ");
+        Label name = new Label("");
+        HBox hbox6 = new HBox();
+
 
 //        Label Starttimelabel = new Label("Start Time : ");
 //        Label Starttime = new Label("");
@@ -97,7 +102,7 @@ public class PermanentSpotsController {
             this.hbox3.getChildren().addAll(PhoneNoLabel, PhoneNo1);
             this.hbox4.getChildren().addAll(GuardLabel, Guard);
             this.hbox5.getChildren().addAll(dateLabel, Date);
-
+            this.hbox6.getChildren().addAll(nameLabel, name);
             this.vbox.setPadding(new Insets(10, 10, 10, 10));
             String cssLayout = "-fx-border-color: #00001a;\n"
                     + "-fx-border-insets: 2;\n"
@@ -106,7 +111,7 @@ public class PermanentSpotsController {
 
             this.vbox.setStyle(cssLayout);
 
-            this.vbox.getChildren().addAll(hbox0, hbox1, hbox2, hbox3, hbox4, hbox5);
+            this.vbox.getChildren().addAll(hbox0, hbox1, hbox2, hbox3, hbox4, hbox5,hbox6);
         }
 
         protected void updateItem(PermanentParkingSpot item, boolean empty) {
@@ -122,6 +127,7 @@ public class PermanentSpotsController {
                 this.Rent1.setText(String.valueOf(item.getRent()) + " Tk.");
                 this.PhoneNo1.setText(item.getPhoneNo());
                 this.ID.setText(String.valueOf(item.getID()));
+                this.name.setText(item.getName());
 
                 if (item.getGuard() == 1) {
                     Guard.setText("Available");
@@ -145,7 +151,7 @@ public class PermanentSpotsController {
     @FXML
     private Label Label1;
 
-    String address;
+    String address="";
     int guard = 0;
 
     DatabaseHelper c = new DatabaseHelper();
@@ -184,13 +190,25 @@ public class PermanentSpotsController {
         c.connectDB();
         
         try {
-
-            String sql = "select * from Ads where Address like ? and Guard = ?";
+            
+            String sql = null;
+            
+            
+            if (!getAddress().isEmpty()) 
+            {
+                //sql = "select * from Ads where Address like '%"+getAddress()+"%' and Guard = "+getGuard();
+                sql = "select * from Ads join ParkingSpotOwner on Ads.SpotOwnerId = ParkingSpotOwner.SpotOwnerId "
+                       + "join Users on Users.UserId = ParkingSpotOwner.UserId where Address like '%"+getAddress()+"%' and Guard = "+getGuard();
+                //ps.setString(1, "%" + getAddress() + "%");
+                //ps.setInt(2, getGuard());
+            } else {
+                sql = "select * from Ads join ParkingSpotOwner on Ads.SpotOwnerId = ParkingSpotOwner.SpotOwnerId join Users on Users.UserId = ParkingSpotOwner.UserId";
+            }
             
             PreparedStatement ps = c.connection.prepareStatement(sql);
-            ps.setString(1, "%" + getAddress()+ "%");
-            ps.setInt(2, getGuard());
+
             ResultSet resultSet = ps.executeQuery();
+            
             
             ArrayList<PermanentParkingSpot> dataForTable = new ArrayList();
 
@@ -206,7 +224,7 @@ public class PermanentSpotsController {
 
                 SimpleDateFormat sm = new SimpleDateFormat("EE dd-MMMM-yyyy hh:mm a");
 
-//                String StartTime = String.valueOf(resultSet.getDate("StartTime"));
+//              String StartTime = String.valueOf(resultSet.getDate("StartTime"));
                 String addedDate = sm.format(date);
                 String Address = resultSet.getString("Address");
                 String contact = resultSet.getString("Contact");
@@ -218,11 +236,12 @@ public class PermanentSpotsController {
 
                 pps.setAddedDate(addedDate);
                 pps.setAddress(Address);
-
+                pps.setName(resultSet.getString("Name"));
                 pps.setGuard(guard);
                 pps.setPhoneNo(contact);
                 pps.setRent(rent);
                 pps.setID(resultSet.getInt("AddID"));
+                
 
                 list.add(pps);
             }

@@ -430,6 +430,7 @@ public class ParkingSpotOwnerHomeController implements Initializable {
     }
 
     void updateAmount() {
+        
         String sql = "  update ParkingRequests set TotalAmount =\n"
                 + "  case \n"
                 + "	when CEILING(DATEDIFF(hour, EndTime, StartTime)) = 0\n"

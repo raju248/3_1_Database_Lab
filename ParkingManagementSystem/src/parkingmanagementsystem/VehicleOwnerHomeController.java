@@ -205,6 +205,8 @@ public class VehicleOwnerHomeController implements Initializable {
  
                         
             
+
+            
             permanentButton.setToggleGroup(tg);
             instantButton.setToggleGroup(tg);
             
@@ -248,6 +250,8 @@ public class VehicleOwnerHomeController implements Initializable {
                         if(s.equals("Permanent"))
                         {
                             guardCheck.setVisible(true);
+                            scene2Controller.loadData();
+                            stage.show();
                         }
                         else
                         {
@@ -256,6 +260,41 @@ public class VehicleOwnerHomeController implements Initializable {
                     }
                 }
             });
+            
+            address.textProperty().addListener((observable, oldValue, newValue) -> {
+                
+                    RadioButton rb1 = (RadioButton) tg.getSelectedToggle();
+                    
+                    if(rb1.getText().equals("Permanent"))
+                    {
+                        int g= 0;
+                        
+                        if(guardCheck.isSelected())
+                            g =1;
+                        
+                        scene2Controller.transferMessage(newValue);
+                        scene2Controller.setAddress(newValue);
+                        scene2Controller.setGuard(g);
+                        scene2Controller.loadData();
+                    }
+            });
+            
+            guardCheck.setOnAction(e->
+            {
+                if(!address.getText().isEmpty())
+                {
+                    int g= 0;
+                        
+                        if(guardCheck.isSelected())
+                            g =1;
+                        
+                        scene2Controller.transferMessage(address.getText().trim());
+                        scene2Controller.setAddress(address.getText().trim());
+                        scene2Controller.setGuard(g);
+                        scene2Controller.loadData();
+                }
+            });
+     
             
             searchButton.setOnAction((e)
                     -> {

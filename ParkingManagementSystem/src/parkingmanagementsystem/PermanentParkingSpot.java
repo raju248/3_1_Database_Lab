@@ -18,6 +18,17 @@ public class PermanentParkingSpot {
 
     String addedDate;
     int ID;
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
 
     public int getID() {
         return ID;

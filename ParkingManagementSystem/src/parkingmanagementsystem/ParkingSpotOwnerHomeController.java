@@ -190,7 +190,7 @@ public class ParkingSpotOwnerHomeController implements Initializable {
             IndicatorLabel.setVisible(true);
             Progressbar.setVisible(true);
             status = 1;
-            changeStatus();
+            
 
             Task<Integer> task = new Task<Integer>() {
                 @Override
@@ -279,7 +279,7 @@ public class ParkingSpotOwnerHomeController implements Initializable {
                                             if (row > 0) {
                                                 System.out.println("request found!!!");
                                                 status = 0;
-                                                changeStatus();
+                                                
                                                 loadRequestPane();
                                                 checkIfCancelled();
                                                 break;
@@ -319,7 +319,7 @@ public class ParkingSpotOwnerHomeController implements Initializable {
             IndicatorLabel.setVisible(false);
             Progressbar.setVisible(false);
             status = 0;
-            changeStatus();
+            
         }
 
     }

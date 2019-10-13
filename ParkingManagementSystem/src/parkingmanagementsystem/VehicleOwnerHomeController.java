@@ -261,9 +261,15 @@ public class VehicleOwnerHomeController implements Initializable {
                 }
             });
             
-            address.textProperty().addListener((observable, oldValue, newValue) -> {
+            
+                address.textProperty().addListener((observable, oldValue, newValue) -> {
                 
-                    RadioButton rb1 = (RadioButton) tg.getSelectedToggle();
+                    if(tg.getSelectedToggle()!=null)
+                    {
+                        
+                        
+                        
+                        RadioButton rb1 = (RadioButton) tg.getSelectedToggle();
                     
                     if(rb1.getText().equals("Permanent"))
                     {
@@ -277,6 +283,10 @@ public class VehicleOwnerHomeController implements Initializable {
                         scene2Controller.setGuard(g);
                         scene2Controller.loadData();
                     }
+                        
+                        
+                    }
+                    
             });
             
             guardCheck.setOnAction(e->

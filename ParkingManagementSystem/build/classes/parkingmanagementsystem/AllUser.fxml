@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parkingmanagementsystem.AllUserController">
+   <children>
+      <JFXListView fx:id="ListView" layoutX="14.0" layoutY="179.0" prefHeight="420.0" prefWidth="383.0" style="-fx-border-color: black;" />
+      <JFXTextField fx:id="input" labelFloat="true" layoutX="106.0" layoutY="70.0" prefHeight="25.0" prefWidth="183.0" />
+      <JFXComboBox fx:id="searchBy" layoutX="106.0" layoutY="27.0" prefHeight="25.0" prefWidth="183.0" />
+      <Label layoutX="24.0" layoutY="29.0" text="Search by :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="search" buttonType="RAISED" layoutX="106.0" layoutY="137.0" prefHeight="25.0" prefWidth="151.0" styleClass="jfx-button-black" stylesheets="@../GeniunCoder.css" text="Search" />
+   </children>
+</AnchorPane>

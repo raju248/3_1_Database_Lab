@@ -78,8 +78,6 @@ public class OtherPermanentParkingSpotController implements Initializable {
             {
                 if(!address.getText().isEmpty())
                 {
-                    
-                        
                         if(guardCheck.isSelected())
                             guard = 1;
                         else
@@ -148,24 +146,6 @@ public class OtherPermanentParkingSpotController implements Initializable {
         HBox hbox6 = new HBox();
 
 
-//        Label Starttimelabel = new Label("Start Time : ");
-//        Label Starttime = new Label("");
-//        HBox hbox6 = new HBox();
-//
-//        Label endtimeLabel = new Label("End Time : ");
-//        Label endtime = new Label("");
-//        HBox hbox7 = new HBox();
-//
-//        Label amountLabel = new Label("Amount : ");
-//        Label amount = new Label("");
-//        HBox hbox8 = new HBox();
-        // Label ratingLabel = new Label("given Rate: ");
-        //  Label rating = new Label("");
-        //  HBox hbox5 = new HBox();
-        //  Label EarningLabel = new Label("total earning: ");
-        //  Label Earning = new Label("");
-        //  HBox hbox6 = new HBox();
-        //
         public XCell() {
             super();
 

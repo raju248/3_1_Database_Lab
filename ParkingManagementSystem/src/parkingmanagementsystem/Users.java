@@ -32,6 +32,11 @@ public class Users {
         this.type = type;
     }
 
+    public Users() {
+    }
+    
+    
+
     public String getName() {
         return name;
     }
